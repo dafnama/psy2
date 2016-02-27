@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>דיווח מפגש</title>
+    <link href='http://fonts.googleapis.com/css?family=Alef:400,700' rel='stylesheet' type='text/css'>
+    <link href="../lib/Pikaday-master/css/pikaday.css" rel="stylesheet">
+    <link href="../css/style.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container">
+        <header class="main-header">
+            <nav class="horizontal">
+                <ul class="clearfix">
+                    <li><a href="#">מוסדות המחוז</a>
+                    </li>
+                    <li><a href="#">הפסיכולוגים במחוז</a>
+                    </li>
+                    <li><a href="#">מערכת לשיבוץ</a>
+                    </li>
+                    <li><a href="#">מחשבון תקן</a>
+                    </li>
+                    <li><a href="#">דו"חות</a>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <article class="main-content">
+            <h1>דיווח מפגש פסיכולוג</h1>
+            <!--form-->
+            <form class="psy-form" action="">
+                <div class="input-line">
+                    <label>תאריך פגישה</label>
+                    <input type="text" id="datepicker" class="datepicker">
+                </div>
+                <div class="input-line">
+                    <label>שם המוסד</label>
+                    <select name="institute-name">
+                        <option value="AU">תיכון עמית עמל</option>
+                    </select>
+                </div>
+                <div class="input-line">
+                    <label>שעות שהיה בבית הספר</label>
+                    <input type="number" name="" size="3" class="small" value="0" max="10" min="1">
+                </div>
+                <div class="input-line">
+                    <label>שעות שהיה בשפ"ח</label>
+                    <input type="number" name="" size="3" class="small" value="0" max="10" min="1">
+                </div>
+                <div class="dynamic-list" data-label="סוגי פעילויות">
+                   <label>סוגי פעילויות</label>
+                    <div class="input-line">
+                        <select name="type[]" class="pull-right mult">
+                            <option value="a">סוג הפעילות</option>
+                        </select>
+                        <textarea name="activity-desc[]" cols="40" placeholder="תיאור הפעילות"></textarea>
+                    </div>
+                    <label>סוגי פעילויות</label>
+                    <div class="input-line">
+                        <select name="type[]" class="pull-right mult">
+                            <option value="a">סוג הפעילות</option>
+                        </select>
+                        <textarea name="activity-desc[]" cols="40" placeholder="תיאור הפעילות"></textarea>
+                    </div>
+
+
+                </div>
+                <div class="input-line clearfix">
+                    <button type="submit" class="pull-left approve">שלח</button>
+                </div>
+
+
+            </form> <!-- /form -->
+        </article>
+        <footer>
+            <nav class="horizontal centered">
+                <ul class="clearfix">
+                    <li><a href="#">קישור לדף</a>
+                    </li>
+                    <li><a href="#">קישור לדף</a>
+                    </li>
+                    <li><a href="#">קישור לדף</a>
+                    </li>
+                    <li><a href="#">קישור לדף</a>
+                    </li>
+                    <li><a href="#">קישור לדף</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </footer>
+    </div>
+    <script src="//cdn.jsdelivr.net/momentjs/2.9.0/moment.min.js"></script>
+    <script src="../lib/Pikaday-master/pikaday.js"></script>
+    <script src="../js/app.js"></script>
+</body>
+
+</html>
