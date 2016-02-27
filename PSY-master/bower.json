@@ -1,0 +1,28 @@
+{
+  "name": "PSY",
+  "version": "0.0.1",
+  "homepage": "https://github.com/naoric/PSY",
+  "authors": [
+    "Ofir"
+  ],
+  "description": "psy project for psychologists reporting",
+  "main": "index.php",
+  "keywords": [
+    "reporting",
+    "information",
+    "system"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "~2.9.0"
+  }
+}

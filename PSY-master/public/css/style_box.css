@@ -1,0 +1,32 @@
+
+.box    {
+    padding: 15px 30px;
+    margin: 20px;
+    text-align: center;
+
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+
+    border-radius: 10px 10px 10px 10px;
+    -moz-border-radius: 10px 10px 10px 10px;
+    -webkit-border-radius: 10px 10px 10px 10px;
+    border: 0px solid #000000;
+
+    background: #7f9db9;
+}
+
+.box_table {
+    position: relative;
+    left: 50px;
+    top: 70px;
+}
+
+a {
+    font-weight: bold;
+    color: rgb(251, 253, 255);
+}
+
+a:hover {
+    color: rgb(251, 253, 255);
+}
