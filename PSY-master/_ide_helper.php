@@ -1,7 +1,7 @@
 <?php
 /**
- * An helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.0.22 on 2015-04-04.
+ * A helper file for Laravel 5, to provide autocomplete information to your IDE
+ * Generated for Laravel 5.0.35 on 2016-02-28.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -127,6 +127,17 @@ namespace {
          */
         public static function databasePath(){
             return \Illuminate\Foundation\Application::databasePath();
+        }
+        
+        /**
+         * Set the database directory.
+         *
+         * @param string $path
+         * @return $this 
+         * @static 
+         */
+        public static function useDatabasePath($path){
+            return \Illuminate\Foundation\Application::useDatabasePath($path);
         }
         
         /**
@@ -547,6 +558,16 @@ namespace {
         }
         
         /**
+         * Get the application's deferred services.
+         *
+         * @return array 
+         * @static 
+         */
+        public static function getDeferredServices(){
+            return \Illuminate\Foundation\Application::getDeferredServices();
+        }
+        
+        /**
          * Set the application's deferred services.
          *
          * @param array $services
@@ -555,6 +576,17 @@ namespace {
          */
         public static function setDeferredServices($services){
             \Illuminate\Foundation\Application::setDeferredServices($services);
+        }
+        
+        /**
+         * Add an array of services to the application's deferred services.
+         *
+         * @param array $services
+         * @return void 
+         * @static 
+         */
+        public static function addDeferredServices($services){
+            \Illuminate\Foundation\Application::addDeferredServices($services);
         }
         
         /**
@@ -1196,7 +1228,7 @@ namespace {
         /**
          * Get the currently authenticated user.
          *
-         * @return \App\User|null 
+         * @return \App\Models\Psychologist|null 
          * @static 
          */
         public static function user(){
@@ -1298,7 +1330,7 @@ namespace {
          *
          * @param mixed $id
          * @param bool $remember
-         * @return \App\User 
+         * @return \App\Models\Psychologist 
          * @static 
          */
         public static function loginUsingId($id, $remember = false){
@@ -1401,9 +1433,9 @@ namespace {
         }
         
         /**
-         * Return the currently cached user of the application.
+         * Return the currently cached user.
          *
-         * @return \App\User|null 
+         * @return \App\Models\Psychologist|null 
          * @static 
          */
         public static function getUser(){
@@ -1411,7 +1443,7 @@ namespace {
         }
         
         /**
-         * Set the current user of the application.
+         * Set the current user.
          *
          * @param \Illuminate\Contracts\Auth\Authenticatable $user
          * @return void 
@@ -1445,7 +1477,7 @@ namespace {
         /**
          * Get the last user we attempted to authenticate.
          *
-         * @return \App\User 
+         * @return \App\Models\Psychologist 
          * @static 
          */
         public static function getLastAttempted(){
@@ -1777,7 +1809,7 @@ namespace {
         }
         
         /**
-         * Register command to handler mappings.
+         * Register command-to-handler mappings.
          *
          * @param array $commands
          * @return void 
@@ -1812,7 +1844,7 @@ namespace {
         }
         
         /**
-         * Set the pipes commands should be piped through before dispatching.
+         * Set the pipes through which commands should be piped before dispatching.
          *
          * @param array $pipes
          * @return $this 
@@ -2587,663 +2619,6 @@ namespace {
          */
         public static function getConnections(){
             return \Illuminate\Database\DatabaseManager::getConnections();
-        }
-        
-        /**
-         * Execute a Closure within a transaction.
-         *
-         * @param \Closure $callback
-         * @return mixed 
-         * @throws \Exception
-         * @static 
-         */
-        public static function transaction($callback){
-            return \Illuminate\Database\SqlServerConnection::transaction($callback);
-        }
-        
-        /**
-         * Set the query grammar to the default implementation.
-         *
-         * @return void 
-         * @static 
-         */
-        public static function useDefaultQueryGrammar(){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::useDefaultQueryGrammar();
-        }
-        
-        /**
-         * Set the schema grammar to the default implementation.
-         *
-         * @return void 
-         * @static 
-         */
-        public static function useDefaultSchemaGrammar(){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::useDefaultSchemaGrammar();
-        }
-        
-        /**
-         * Set the query post processor to the default implementation.
-         *
-         * @return void 
-         * @static 
-         */
-        public static function useDefaultPostProcessor(){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::useDefaultPostProcessor();
-        }
-        
-        /**
-         * Get a schema builder instance for the connection.
-         *
-         * @return \Illuminate\Database\Schema\Builder 
-         * @static 
-         */
-        public static function getSchemaBuilder(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getSchemaBuilder();
-        }
-        
-        /**
-         * Begin a fluent query against a database table.
-         *
-         * @param string $table
-         * @return \Illuminate\Database\Query\Builder 
-         * @static 
-         */
-        public static function table($table){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::table($table);
-        }
-        
-        /**
-         * Get a new raw query expression.
-         *
-         * @param mixed $value
-         * @return \Illuminate\Database\Query\Expression 
-         * @static 
-         */
-        public static function raw($value){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::raw($value);
-        }
-        
-        /**
-         * Run a select statement and return a single result.
-         *
-         * @param string $query
-         * @param array $bindings
-         * @return mixed 
-         * @static 
-         */
-        public static function selectOne($query, $bindings = array()){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::selectOne($query, $bindings);
-        }
-        
-        /**
-         * Run a select statement against the database.
-         *
-         * @param string $query
-         * @param array $bindings
-         * @return array 
-         * @static 
-         */
-        public static function selectFromWriteConnection($query, $bindings = array()){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::selectFromWriteConnection($query, $bindings);
-        }
-        
-        /**
-         * Run a select statement against the database.
-         *
-         * @param string $query
-         * @param array $bindings
-         * @param bool $useReadPdo
-         * @return array 
-         * @static 
-         */
-        public static function select($query, $bindings = array(), $useReadPdo = true){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::select($query, $bindings, $useReadPdo);
-        }
-        
-        /**
-         * Run an insert statement against the database.
-         *
-         * @param string $query
-         * @param array $bindings
-         * @return bool 
-         * @static 
-         */
-        public static function insert($query, $bindings = array()){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::insert($query, $bindings);
-        }
-        
-        /**
-         * Run an update statement against the database.
-         *
-         * @param string $query
-         * @param array $bindings
-         * @return int 
-         * @static 
-         */
-        public static function update($query, $bindings = array()){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::update($query, $bindings);
-        }
-        
-        /**
-         * Run a delete statement against the database.
-         *
-         * @param string $query
-         * @param array $bindings
-         * @return int 
-         * @static 
-         */
-        public static function delete($query, $bindings = array()){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::delete($query, $bindings);
-        }
-        
-        /**
-         * Execute an SQL statement and return the boolean result.
-         *
-         * @param string $query
-         * @param array $bindings
-         * @return bool 
-         * @static 
-         */
-        public static function statement($query, $bindings = array()){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::statement($query, $bindings);
-        }
-        
-        /**
-         * Run an SQL statement and get the number of rows affected.
-         *
-         * @param string $query
-         * @param array $bindings
-         * @return int 
-         * @static 
-         */
-        public static function affectingStatement($query, $bindings = array()){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::affectingStatement($query, $bindings);
-        }
-        
-        /**
-         * Run a raw, unprepared query against the PDO connection.
-         *
-         * @param string $query
-         * @return bool 
-         * @static 
-         */
-        public static function unprepared($query){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::unprepared($query);
-        }
-        
-        /**
-         * Prepare the query bindings for execution.
-         *
-         * @param array $bindings
-         * @return array 
-         * @static 
-         */
-        public static function prepareBindings($bindings){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::prepareBindings($bindings);
-        }
-        
-        /**
-         * Start a new database transaction.
-         *
-         * @return void 
-         * @static 
-         */
-        public static function beginTransaction(){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::beginTransaction();
-        }
-        
-        /**
-         * Commit the active database transaction.
-         *
-         * @return void 
-         * @static 
-         */
-        public static function commit(){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::commit();
-        }
-        
-        /**
-         * Rollback the active database transaction.
-         *
-         * @return void 
-         * @static 
-         */
-        public static function rollBack(){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::rollBack();
-        }
-        
-        /**
-         * Get the number of active transactions.
-         *
-         * @return int 
-         * @static 
-         */
-        public static function transactionLevel(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::transactionLevel();
-        }
-        
-        /**
-         * Execute the given callback in "dry run" mode.
-         *
-         * @param \Closure $callback
-         * @return array 
-         * @static 
-         */
-        public static function pretend($callback){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::pretend($callback);
-        }
-        
-        /**
-         * Log a query in the connection's query log.
-         *
-         * @param string $query
-         * @param array $bindings
-         * @param float|null $time
-         * @return void 
-         * @static 
-         */
-        public static function logQuery($query, $bindings, $time = null){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::logQuery($query, $bindings, $time);
-        }
-        
-        /**
-         * Register a database query listener with the connection.
-         *
-         * @param \Closure $callback
-         * @return void 
-         * @static 
-         */
-        public static function listen($callback){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::listen($callback);
-        }
-        
-        /**
-         * Get a Doctrine Schema Column instance.
-         *
-         * @param string $table
-         * @param string $column
-         * @return \Doctrine\DBAL\Schema\Column 
-         * @static 
-         */
-        public static function getDoctrineColumn($table, $column){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getDoctrineColumn($table, $column);
-        }
-        
-        /**
-         * Get the Doctrine DBAL schema manager for the connection.
-         *
-         * @return \Doctrine\DBAL\Schema\AbstractSchemaManager 
-         * @static 
-         */
-        public static function getDoctrineSchemaManager(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getDoctrineSchemaManager();
-        }
-        
-        /**
-         * Get the Doctrine DBAL database connection instance.
-         *
-         * @return \Doctrine\DBAL\Connection 
-         * @static 
-         */
-        public static function getDoctrineConnection(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getDoctrineConnection();
-        }
-        
-        /**
-         * Get the current PDO connection.
-         *
-         * @return \PDO 
-         * @static 
-         */
-        public static function getPdo(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getPdo();
-        }
-        
-        /**
-         * Get the current PDO connection used for reading.
-         *
-         * @return \PDO 
-         * @static 
-         */
-        public static function getReadPdo(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getReadPdo();
-        }
-        
-        /**
-         * Set the PDO connection.
-         *
-         * @param \PDO|null $pdo
-         * @return $this 
-         * @static 
-         */
-        public static function setPdo($pdo){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::setPdo($pdo);
-        }
-        
-        /**
-         * Set the PDO connection used for reading.
-         *
-         * @param \PDO|null $pdo
-         * @return $this 
-         * @static 
-         */
-        public static function setReadPdo($pdo){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::setReadPdo($pdo);
-        }
-        
-        /**
-         * Set the reconnect instance on the connection.
-         *
-         * @param callable $reconnector
-         * @return $this 
-         * @static 
-         */
-        public static function setReconnector($reconnector){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::setReconnector($reconnector);
-        }
-        
-        /**
-         * Get the database connection name.
-         *
-         * @return string|null 
-         * @static 
-         */
-        public static function getName(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getName();
-        }
-        
-        /**
-         * Get an option from the configuration options.
-         *
-         * @param string $option
-         * @return mixed 
-         * @static 
-         */
-        public static function getConfig($option){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getConfig($option);
-        }
-        
-        /**
-         * Get the PDO driver name.
-         *
-         * @return string 
-         * @static 
-         */
-        public static function getDriverName(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getDriverName();
-        }
-        
-        /**
-         * Get the query grammar used by the connection.
-         *
-         * @return \Illuminate\Database\Query\Grammars\Grammar 
-         * @static 
-         */
-        public static function getQueryGrammar(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getQueryGrammar();
-        }
-        
-        /**
-         * Set the query grammar used by the connection.
-         *
-         * @param \Illuminate\Database\Query\Grammars\Grammar
-         * @return void 
-         * @static 
-         */
-        public static function setQueryGrammar($grammar){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::setQueryGrammar($grammar);
-        }
-        
-        /**
-         * Get the schema grammar used by the connection.
-         *
-         * @return \Illuminate\Database\Schema\Grammars\Grammar 
-         * @static 
-         */
-        public static function getSchemaGrammar(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getSchemaGrammar();
-        }
-        
-        /**
-         * Set the schema grammar used by the connection.
-         *
-         * @param \Illuminate\Database\Schema\Grammars\Grammar
-         * @return void 
-         * @static 
-         */
-        public static function setSchemaGrammar($grammar){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::setSchemaGrammar($grammar);
-        }
-        
-        /**
-         * Get the query post processor used by the connection.
-         *
-         * @return \Illuminate\Database\Query\Processors\Processor 
-         * @static 
-         */
-        public static function getPostProcessor(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getPostProcessor();
-        }
-        
-        /**
-         * Set the query post processor used by the connection.
-         *
-         * @param \Illuminate\Database\Query\Processors\Processor
-         * @return void 
-         * @static 
-         */
-        public static function setPostProcessor($processor){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::setPostProcessor($processor);
-        }
-        
-        /**
-         * Get the event dispatcher used by the connection.
-         *
-         * @return \Illuminate\Contracts\Events\Dispatcher 
-         * @static 
-         */
-        public static function getEventDispatcher(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getEventDispatcher();
-        }
-        
-        /**
-         * Set the event dispatcher instance on the connection.
-         *
-         * @param \Illuminate\Contracts\Events\Dispatcher
-         * @return void 
-         * @static 
-         */
-        public static function setEventDispatcher($events){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::setEventDispatcher($events);
-        }
-        
-        /**
-         * Determine if the connection in a "dry run".
-         *
-         * @return bool 
-         * @static 
-         */
-        public static function pretending(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::pretending();
-        }
-        
-        /**
-         * Get the default fetch mode for the connection.
-         *
-         * @return int 
-         * @static 
-         */
-        public static function getFetchMode(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getFetchMode();
-        }
-        
-        /**
-         * Set the default fetch mode for the connection.
-         *
-         * @param int $fetchMode
-         * @return int 
-         * @static 
-         */
-        public static function setFetchMode($fetchMode){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::setFetchMode($fetchMode);
-        }
-        
-        /**
-         * Get the connection query log.
-         *
-         * @return array 
-         * @static 
-         */
-        public static function getQueryLog(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getQueryLog();
-        }
-        
-        /**
-         * Clear the query log.
-         *
-         * @return void 
-         * @static 
-         */
-        public static function flushQueryLog(){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::flushQueryLog();
-        }
-        
-        /**
-         * Enable the query log on the connection.
-         *
-         * @return void 
-         * @static 
-         */
-        public static function enableQueryLog(){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::enableQueryLog();
-        }
-        
-        /**
-         * Disable the query log on the connection.
-         *
-         * @return void 
-         * @static 
-         */
-        public static function disableQueryLog(){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::disableQueryLog();
-        }
-        
-        /**
-         * Determine whether we're logging queries.
-         *
-         * @return bool 
-         * @static 
-         */
-        public static function logging(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::logging();
-        }
-        
-        /**
-         * Get the name of the connected database.
-         *
-         * @return string 
-         * @static 
-         */
-        public static function getDatabaseName(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getDatabaseName();
-        }
-        
-        /**
-         * Set the name of the connected database.
-         *
-         * @param string $database
-         * @return string 
-         * @static 
-         */
-        public static function setDatabaseName($database){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::setDatabaseName($database);
-        }
-        
-        /**
-         * Get the table prefix for the connection.
-         *
-         * @return string 
-         * @static 
-         */
-        public static function getTablePrefix(){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::getTablePrefix();
-        }
-        
-        /**
-         * Set the table prefix in use by the connection.
-         *
-         * @param string $prefix
-         * @return void 
-         * @static 
-         */
-        public static function setTablePrefix($prefix){
-            //Method inherited from \Illuminate\Database\Connection            
-            \Illuminate\Database\SqlServerConnection::setTablePrefix($prefix);
-        }
-        
-        /**
-         * Set the table prefix and return the grammar.
-         *
-         * @param \Illuminate\Database\Grammar $grammar
-         * @return \Illuminate\Database\Grammar 
-         * @static 
-         */
-        public static function withTablePrefix($grammar){
-            //Method inherited from \Illuminate\Database\Connection            
-            return \Illuminate\Database\SqlServerConnection::withTablePrefix($grammar);
         }
         
     }
@@ -4307,11 +3682,12 @@ namespace {
         /**
          * Get the count of the total records for the paginator.
          *
+         * @param array $columns
          * @return int 
          * @static 
          */
-        public static function getCountForPagination(){
-            return \Illuminate\Database\Query\Builder::getCountForPagination();
+        public static function getCountForPagination($columns = array()){
+            return \Illuminate\Database\Query\Builder::getCountForPagination($columns);
         }
         
         /**
@@ -4351,7 +3727,7 @@ namespace {
          * Retrieve the minimum value of a given column.
          *
          * @param string $column
-         * @return mixed 
+         * @return float|int 
          * @static 
          */
         public static function min($column){
@@ -4362,7 +3738,7 @@ namespace {
          * Retrieve the maximum value of a given column.
          *
          * @param string $column
-         * @return mixed 
+         * @return float|int 
          * @static 
          */
         public static function max($column){
@@ -4373,7 +3749,7 @@ namespace {
          * Retrieve the sum of the values of a given column.
          *
          * @param string $column
-         * @return mixed 
+         * @return float|int 
          * @static 
          */
         public static function sum($column){
@@ -4384,7 +3760,7 @@ namespace {
          * Retrieve the average of the values of a given column.
          *
          * @param string $column
-         * @return mixed 
+         * @return float|int 
          * @static 
          */
         public static function avg($column){
@@ -4396,7 +3772,7 @@ namespace {
          *
          * @param string $function
          * @param array $columns
-         * @return mixed 
+         * @return float|int 
          * @static 
          */
         public static function aggregate($function, $columns = array()){
@@ -4590,7 +3966,7 @@ namespace {
         /**
          * Register an event subscriber with the dispatcher.
          *
-         * @param string $subscriber
+         * @param object|string $subscriber
          * @return void 
          * @static 
          */
@@ -5344,7 +4720,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function query($key = null, $default = null){
@@ -5367,7 +4743,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function cookie($key = null, $default = null){
@@ -5402,7 +4778,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function header($key = null, $default = null){
@@ -5414,7 +4790,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function server($key = null, $default = null){
@@ -5699,7 +5075,7 @@ namespace {
          * @param array $cookies The COOKIE parameters
          * @param array $files The FILES parameters
          * @param array $server The SERVER parameters
-         * @param string $content The raw body data
+         * @param string|resource $content The raw body data
          * @api 
          * @static 
          */
@@ -7237,82 +6613,6 @@ namespace {
     }
 
 
-    class Password extends \Illuminate\Support\Facades\Password{
-        
-        /**
-         * Send a password reset link to a user.
-         *
-         * @param array $credentials
-         * @param \Closure|null $callback
-         * @return string 
-         * @static 
-         */
-        public static function sendResetLink($credentials, $callback = null){
-            return \Illuminate\Auth\Passwords\PasswordBroker::sendResetLink($credentials, $callback);
-        }
-        
-        /**
-         * Send the password reset link via e-mail.
-         *
-         * @param \Illuminate\Contracts\Auth\CanResetPassword $user
-         * @param string $token
-         * @param \Closure|null $callback
-         * @return int 
-         * @static 
-         */
-        public static function emailResetLink($user, $token, $callback = null){
-            return \Illuminate\Auth\Passwords\PasswordBroker::emailResetLink($user, $token, $callback);
-        }
-        
-        /**
-         * Reset the password for the given token.
-         *
-         * @param array $credentials
-         * @param \Closure $callback
-         * @return mixed 
-         * @static 
-         */
-        public static function reset($credentials, $callback){
-            return \Illuminate\Auth\Passwords\PasswordBroker::reset($credentials, $callback);
-        }
-        
-        /**
-         * Set a custom password validator.
-         *
-         * @param \Closure $callback
-         * @return void 
-         * @static 
-         */
-        public static function validator($callback){
-            \Illuminate\Auth\Passwords\PasswordBroker::validator($callback);
-        }
-        
-        /**
-         * Determine if the passwords match for the request.
-         *
-         * @param array $credentials
-         * @return bool 
-         * @static 
-         */
-        public static function validateNewPassword($credentials){
-            return \Illuminate\Auth\Passwords\PasswordBroker::validateNewPassword($credentials);
-        }
-        
-        /**
-         * Get the user for the given credentials.
-         *
-         * @param array $credentials
-         * @return \Illuminate\Contracts\Auth\CanResetPassword 
-         * @throws \UnexpectedValueException
-         * @static 
-         */
-        public static function getUser($credentials){
-            return \Illuminate\Auth\Passwords\PasswordBroker::getUser($credentials);
-        }
-        
-    }
-
-
     class Queue extends \Illuminate\Support\Facades\Queue{
         
         /**
@@ -7443,6 +6743,7 @@ namespace {
          * @param mixed $data
          * @param string $queue
          * @return mixed 
+         * @throws \Exception
          * @static 
          */
         public static function push($job, $data = '', $queue = null){
@@ -7961,7 +7262,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function query($key = null, $default = null){
@@ -7984,7 +7285,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function cookie($key = null, $default = null){
@@ -8019,7 +7320,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function header($key = null, $default = null){
@@ -8031,7 +7332,7 @@ namespace {
          *
          * @param string $key
          * @param mixed $default
-         * @return string 
+         * @return string|array 
          * @static 
          */
         public static function server($key = null, $default = null){
@@ -8316,7 +7617,7 @@ namespace {
          * @param array $cookies The COOKIE parameters
          * @param array $files The FILES parameters
          * @param array $server The SERVER parameters
-         * @param string $content The raw body data
+         * @param string|resource $content The raw body data
          * @api 
          * @static 
          */
@@ -10009,135 +9310,6 @@ namespace {
     }
 
 
-    class Schema extends \Illuminate\Support\Facades\Schema{
-        
-        /**
-         * Determine if the given table exists.
-         *
-         * @param string $table
-         * @return bool 
-         * @static 
-         */
-        public static function hasTable($table){
-            return \Illuminate\Database\Schema\Builder::hasTable($table);
-        }
-        
-        /**
-         * Determine if the given table has a given column.
-         *
-         * @param string $table
-         * @param string $column
-         * @return bool 
-         * @static 
-         */
-        public static function hasColumn($table, $column){
-            return \Illuminate\Database\Schema\Builder::hasColumn($table, $column);
-        }
-        
-        /**
-         * Get the column listing for a given table.
-         *
-         * @param string $table
-         * @return array 
-         * @static 
-         */
-        public static function getColumnListing($table){
-            return \Illuminate\Database\Schema\Builder::getColumnListing($table);
-        }
-        
-        /**
-         * Modify a table on the schema.
-         *
-         * @param string $table
-         * @param \Closure $callback
-         * @return \Illuminate\Database\Schema\Blueprint 
-         * @static 
-         */
-        public static function table($table, $callback){
-            return \Illuminate\Database\Schema\Builder::table($table, $callback);
-        }
-        
-        /**
-         * Create a new table on the schema.
-         *
-         * @param string $table
-         * @param \Closure $callback
-         * @return \Illuminate\Database\Schema\Blueprint 
-         * @static 
-         */
-        public static function create($table, $callback){
-            return \Illuminate\Database\Schema\Builder::create($table, $callback);
-        }
-        
-        /**
-         * Drop a table from the schema.
-         *
-         * @param string $table
-         * @return \Illuminate\Database\Schema\Blueprint 
-         * @static 
-         */
-        public static function drop($table){
-            return \Illuminate\Database\Schema\Builder::drop($table);
-        }
-        
-        /**
-         * Drop a table from the schema if it exists.
-         *
-         * @param string $table
-         * @return \Illuminate\Database\Schema\Blueprint 
-         * @static 
-         */
-        public static function dropIfExists($table){
-            return \Illuminate\Database\Schema\Builder::dropIfExists($table);
-        }
-        
-        /**
-         * Rename a table on the schema.
-         *
-         * @param string $from
-         * @param string $to
-         * @return \Illuminate\Database\Schema\Blueprint 
-         * @static 
-         */
-        public static function rename($from, $to){
-            return \Illuminate\Database\Schema\Builder::rename($from, $to);
-        }
-        
-        /**
-         * Get the database connection instance.
-         *
-         * @return \Illuminate\Database\Connection 
-         * @static 
-         */
-        public static function getConnection(){
-            return \Illuminate\Database\Schema\Builder::getConnection();
-        }
-        
-        /**
-         * Set the database connection instance.
-         *
-         * @param \Illuminate\Database\Connection
-         * @return $this 
-         * @static 
-         */
-        public static function setConnection($connection){
-            return \Illuminate\Database\Schema\Builder::setConnection($connection);
-        }
-        
-        /**
-         * Set the Schema Blueprint resolver callback.
-         *
-         * @param \Closure $resolver
-         * @return void 
-         * @static 
-         */
-        public static function blueprintResolver($resolver){
-            \Illuminate\Database\Schema\Builder::blueprintResolver($resolver);
-        }
-        
-    }
-
-
     class Session extends \Illuminate\Support\Facades\Session{
         
         /**
@@ -11513,6 +10685,17 @@ namespace {
          */
         public static function getShared(){
             return \Illuminate\View\Factory::getShared();
+        }
+        
+        /**
+         * Check if section exists.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */
+        public static function hasSection($name){
+            return \Illuminate\View\Factory::hasSection($name);
         }
         
         /**
