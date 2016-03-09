@@ -69,6 +69,15 @@
                 </li>
                 @if(!Auth::user()->isUser())
                 <li>
+                    <a href="#">הדרכות</a>
+                    <ul>
+                        <li><a href="{{route('training.index')}}">רשימת הדרכות</a>
+                        <li><a href="{{route('training.create')}}">שיבוץ פסיכולוג להדרכה</a></li>
+                    </ul>
+                </li>
+                @endif
+                @if(!Auth::user()->isUser())
+                <li>
                     <a href="#">שיבוץ פסיכולוג במוסד</a>
                     <ul>
                         <li><a href="/calc">מחשבון לתקן שיבוץ</a></li>
