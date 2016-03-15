@@ -64,7 +64,9 @@
                     <a href="#">מפגשים ודיווח</a>
                     <ul>
                         <li><a href="{{route('visit.index')}}">רשימת מפגשים</a>
-                        <li><a href="{{route('visit.create')}}">דיווח מפגש במוסד</a></li>
+                        <li><a href="{{route('visit.create')}}">דיווח מפגש במוסד</a>
+                        <li><a href="{{route('session.index')}}">רשימות מפגשי הדרכות</a>
+                        <li><a href="{{route('session.create')}}">דיווח מפגשי הדרכה</a></li>
                     </ul>
                 </li>
                 @if(!Auth::user()->isUser())

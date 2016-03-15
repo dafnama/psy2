@@ -20,6 +20,7 @@ Route::group( [ 'middleware' => 'auth', 'permissions' => 'manager' ], function (
 	Route::resource( 'visit', 'VisitController', [ 'except' => [ 'patch' ] ] );
 	Route::resource( 'match', 'MatchController', [ 'except' => [ 'show', 'patch' ] ] );
         Route::resource( 'training', 'TrainingController', [ 'except' => [ 'show', 'patch' ]] );
+        Route::resource( 'session', 'SessionController', [ 'except' => [ 'show', 'patch' ]] );
 	Route::resource( 'institute', 'InstituteController', [ 'except' => [ 'patch' ] ] );
     Route::resource( 'psychologist', 'PsychologistController', [ 'except' => [ 'patch' ] ] );
 
@@ -30,7 +31,8 @@ Route::group( [ 'middleware' => 'auth', 'permissions' => 'user' ], function () {
 	Route::resource( 'visit', 'VisitController', [ 'except' => [ 'patch' ] ] );
 	Route::resource('match', 'MatchController', ['only' => ['index']]);
         Route::resource( 'training', 'TrainingController', [ 'except' => [ 'show', 'patch' ] ] );
-        Route::resource( 'institute', 'InstituteController', [ 'only' => [ 'show', 'index' ] ] );
+        Route::resource( 'session', 'SessionController', [ 'except' => [ 'show', 'patch' ]] );
+        Route::resource( 'institute', 'InstituteController', [ 'except' => [ 'show', 'index' ] ] );
 	Route::resource( 'psychologist', 'PsychologistController', [ 'only' => [ 'index' ] ] );
 	Route::resource( 'shapah', 'ShapahController', [ 'only' => [ 'show'] ] );
 } );
@@ -73,7 +75,7 @@ Route::get( 'delete-match', function () {
 	return view( 'forms.delete_match' );
 } );
 
-Route::get( 'delete-training', function () {
+Route::get( 'delete-traininig', function () {
 	return view( 'forms.delete_training' );
 } );
 
@@ -90,6 +92,12 @@ Route::get( 'institute_new', function () {
 Route::get( 'new_match', function () {
 	return view( 'forms.new_match' );
 } );
+
+Route::get( 'new_session', function () {
+	return view( 'forms.new_session' );
+} );
+
+Route::get('/session/{filter}', ['as' => 'session', 'uses' => 'sessionController@index']);
 
 Route::get( 'new_training', function () {
 	return view( 'forms.new_training' );
