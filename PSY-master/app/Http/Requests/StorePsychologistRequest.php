@@ -23,7 +23,7 @@ class StorePsychologistRequest extends Request {
 	{
 		return [
             'license_number'=> 'required|unique:psychologists|numeric',
-            'start_working_date' => 'date'
+            'start_working_date' => 'date',
             'first_name'=> 'required|alpha',
             'last_name'=> 'required|alpha',
             'city_of_residence' => 'alpha',
