@@ -21,8 +21,13 @@ use App\Models\Psychologist;
             <span  class="input-line">
                 <select name="filter_guided"  style="width: 130px" class=" mult">
                     <option disabled="disabled" selected="selected" value="">בחר מרשימה</option>
+                    <?php $psy_array=array();?>
                     @foreach ($trainings as $train)
-                        <?php $psy=Psychologist::find($train->guided_id);?>
+                        <?php 
+                        $psy=Psychologist::find($train->guided_id);
+                        if (!in_array($psy,$psy_array )){$psy_array[]=$psy;}?>
+                    @endforeach
+                    @foreach ($psy_array as $psy)
                         <option value="{{{$psy->id}}}">{{{$psy->last_name .(' ').$psy->first_name }}}</option>
                     @endforeach
                 </select>
@@ -33,8 +38,12 @@ use App\Models\Psychologist;
             <span class="input-line">
                 <select name="filter_guid" style="width: 130px" class=" mult">
                     <option disabled="disabled" selected="selected" value="">בחר מרשימה</option>
+                    <?php $psy_array=array();?>
                     @foreach ($trainings as $train)
-                        <?php $psy=Psychologist::find($train->guide_id);?>
+                        <?php $psy=Psychologist::find($train->guide_id);
+                        if (!in_array($psy,$psy_array )){$psy_array[]=$psy;}?>
+                    @endforeach
+                    @foreach ($psy_array as $psy)
                         <option value="{{{$psy->id}}}">{{{$psy->last_name .(' ').$psy->first_name }}}</option>
                     @endforeach
                 </select>

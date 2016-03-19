@@ -30,7 +30,6 @@ protected $request;
 	public function index() {
             $sessions= new Session;
             if ( Input::has('filter_guid') && trim(Input::get('filter_guid')) !== '' ){
-                //$trains=Training::find(3)->get();
                 $trains= new Training;
                 $trains=$trains->where('guide_id', '=', Input::get('filter_guid'))->get();
                 $train_array=array();
@@ -46,13 +45,35 @@ protected $request;
             if (Input::has('filter_kind') && trim(Input::get('filter_kind')) !== ''){
                 $sessions = $sessions->where('kind',"=",(string)Input::get('filter_kind'));
             }
+            $user= Auth::user();
+            if ($user->permission!=3){
+                $trains_array=array();
+                $trains= new Training;
+                if ($user->permission==2){
+                    $psychologists=$this->getShapahPsychologists($user);
+                    foreach ($psychologists as $psy){
+                        $trains=$trains->where('guided_id', '=',(int)$psy->id)->orWhere('guide_id', '=',(int)$psy->id)->get();
+                        foreach ($trains as $train){
+                            $trains_array[]=$train->id;
+                        }
+                    }
+                    $sessions = $sessions->whereIn('trining_id', $trains_array);
+                }
+                else {
+                    $trains=$trains->where('guided_id', '=',$user->id)->orWhere('guide_id', '=',$user->id)->get();
+                        foreach ($trains as $train){
+                            $trains_array[]=$train->id;
+                        }
+                    $sessions = $sessions->whereIn('trining_id', $trains_array);
+                }
+            }
             $sessions = $sessions->get();
 		return view( 'indexes.session', compact( 'sessions'));
 	}
 
         
         public function create() {
-            $session  = new Session();
+            $session  = new Session;
             $is_new = true;
             return view( 'forms.new_session', compact( 'session', 'is_new') );
 	}
@@ -84,10 +105,24 @@ protected $request;
 		return redirect()->route( 'session.index' );
 	}
         
-        public function filterIndex(){
-            
-            return redirect()->route( 'session.index' );
-        }
+              private function getShapahPsychologists( Psychologist $psychologist ) {
+		$psychologists = [];
+		$main_shapah = $this->getMainShapah($psychologist);
+                foreach ($main_shapah->psychologists as $shap_psy){
+                $psychologists[$shap_psy->id] = $shap_psy;
+                }
+		return $psychologists;
+	}
+        
+        public function getMainShapah(Psychologist $manager){
+            $main_shapah = new Shapah();
+            foreach ($manager->shapahs as $shapah){
+                if ($manager->shapahs()->where('shapah_id',$shapah->id)->first()){
+                    $main_shapah = $shapah;
+                }
+            }
+        return $main_shapah;
+    }
        
 	
 }
