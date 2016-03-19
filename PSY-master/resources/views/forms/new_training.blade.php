@@ -7,7 +7,7 @@
 @section('content')
 <?php $array_years=['התשע"ה','התשע"ו','התשע"ז','התשע"ח','התשע"ט','התש"ף','התשפ"א'];?>
 <?php $array_kind=['הדרכה בתהליך התמחות','הדרכה בהסמכה להדרכה','הדרכה לפרה מתמחה/סטודנט','הדרכה כללית'];?>
-    <form class="psy-form" action="{{{route('training.update',$training->id)}}}" method="post">
+    <form class="psy-form" action="{{{route($form_url,$training->id)}}}" method="post">
         @if(isset($is_new) && !$is_new)
             <input type="hidden" name="_method" value="PUT">
         @endif

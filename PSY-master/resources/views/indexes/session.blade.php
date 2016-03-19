@@ -17,8 +17,14 @@ use App\Models\Psychologist;?>
             <span class="input-line">
                 <select name="filter_guid" class=" mult">
                     <option disabled="disabled" selected="selected" value="">בחר מרשימה</option>
+                    <?php $psy_array=array();?>
+                    
                     @foreach ($sessions as $ses)
-                        <?php $psy=Psychologist::find(Training::find($ses->trining_id)->guide_id);?>
+                        <?php 
+                        $psy=Psychologist::find(Training::find($ses->trining_id)->guide_id);
+                        if (!in_array($psy,$psy_array )){$psy_array[]=$psy;}?>
+                    @endforeach
+                    @foreach ($psy_array as $psy)
                         <option value="{{{$psy->id}}}">{{{$psy->last_name .(' ').$psy->first_name }}}</option>
                     @endforeach
                 </select>

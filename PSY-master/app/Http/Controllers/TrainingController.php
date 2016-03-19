@@ -14,6 +14,7 @@ use Input;
 
 class TrainingController extends Controller {
 	public function index() {
+            $user=Auth::user();
             $trainings= new Training;
             if ( Input::has('filter_guid') && trim(Input::get('filter_guid')) !== '' ){
                 $trainings = $trainings->where('guide_id', '=', Input::get('filter_guid'));
@@ -27,6 +28,15 @@ class TrainingController extends Controller {
             if (Input::has('filter_hours') && trim(Input::get('filter_hours')) !== ''){
                 $trainings = $trainings->where('training_hours ', '=', Input::get('filter_hours'));
             }
+            //permission
+            if ($user->permission!=3){
+                $psychologists=$this->getShapahPsychologists($user);
+                $psychologists_array=array();
+                foreach ($psychologists as $psy){
+                    $psychologists_array[]=(int)$psy->id;
+                }
+                $trainings = $trainings->whereIn('guided_id', $psychologists_array);
+            }
             $trainings = $trainings->get();
 		return view( 'indexes.training', compact( 'trainings' ));
 	}
@@ -35,15 +45,24 @@ class TrainingController extends Controller {
         public function create() {
             $training  = new Training();
             $is_new = true;
-            $psychologists = $this->getShapahPsychologists( Auth::user() );
-            return view( 'forms.new_training', compact( 'training', 'is_new' ,'psychologists') );
+            $user=Auth::user();
+            if ($user->permission!=3){
+            $psychologists = $this->getShapahPsychologists( $user);
+            }
+            else {
+                 $psychologists= new Psychologist;
+                 $psychologists= $psychologists->get();
+            }
+            $form_url     = 'training.store';
+            return view( 'forms.new_training', compact( 'training', 'is_new' ,'psychologists','form_url') );
 	}
         
-        public function update( Training $training ) {
+        public function update( $train ) {
 		$input_data = Input::All();
-		$training->fill( $input_data );
-		$training->save();
-		//$this->setUserPermission( $psychologist );
+                $training= new Training;
+                $training=$training->where('id', '=', $train)->first();
+		$training->fill($input_data);
+                $training->save();
 		return redirect()->route( 'training.index' );
 	}
         
@@ -52,19 +71,14 @@ class TrainingController extends Controller {
                 $training= new Training;
                 $training=$training->where('id', '=', $train)->first();
                 if (!($training)){
-                     Log::info("NO training");
                     $trainings = $trainings->get();
                 }
 		$is_new = false;
                 $psychologists = $this->getShapahPsychologists( Auth::user() );
-		return view( 'forms.new_training', compact( 'training', 'is_new','psychologists' ) );
+                $form_url    = 'training.update';
+		return view( 'forms.new_training', compact( 'training', 'is_new','psychologists','form_url' ) );
 	}
-        /*public function edit( Training $training ) {
-		$is_new = false;
-                $psychologists = $this->getShapahPsychologists( Auth::user() );
-		return view( 'forms.new_training', compact( 'training', 'is_new','psychologists' ) );
-	}*/
-        
+
         public function store() {
 		$user_data = \Request::all();
 		$training = new Training($user_data);
@@ -88,42 +102,24 @@ class TrainingController extends Controller {
                 $trainings= new Training;
                 $trainings= $trainings->get();
                 return view( 'indexes.training', compact( 'trainings' ,'error') );
-		//return redirect()->route( 'training.index' );
 	}
-        
-        
-        /*public function destroy(Training $train) {
-            $input = Input::all();
-                //$id=Input::has('delete_id');
-                Log::info("111111111111111111:");
-                Log::info("t:".$train);
-                Log::info($train->id);
-                Log::info(gettype ($train->id));
-                Log::info($input);
-                \DB::table( 'Trainings' )->where('id', '=', $train->id)->delete();
-                $e=$train->delete();
-		return redirect()->route( 'training.index' );
-	}*/
-        
- 
+
          private function getShapahPsychologists( Psychologist $psychologist ) {
 		$psychologists = [];
 		$main_shapah = $this->getMainShapah($psychologist);
                 foreach ($main_shapah->psychologists as $shap_psy){
                 $psychologists[$shap_psy->id] = $shap_psy;
                 }
-
-
 		return $psychologists;
 	}
         
         public function getMainShapah(Psychologist $manager){
-        $main_shapah = new Shapah();
-        foreach ($manager->shapahs as $shapah){
-            if ($manager->shapahs()->where('shapah_id',$shapah->id)->first()){
-                $main_shapah = $shapah;
+            $main_shapah = new Shapah();
+            foreach ($manager->shapahs as $shapah){
+                if ($manager->shapahs()->where('shapah_id',$shapah->id)->first()){
+                    $main_shapah = $shapah;
+                }
             }
-        }
         return $main_shapah;
     }
 	
