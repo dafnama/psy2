@@ -1,5 +1,5 @@
 @extends('app')
-
+<?php use App\Models\Institute;?>
 @section('page-title')
         <h1> מחשבון לחישוב תקן</h1>
         <h2> ע"פ מפתח עבודה מומלץ בחוזר מנכ"ל משרד החינוך</h2>
@@ -9,21 +9,36 @@
 @section('content')
     <form class="psy-form" id="calcForm" STYLE="background-color: #E8E8E8;" >
 
-
-
+<?php if( isset($_GET["inst"])){
+            $id= $_GET["inst"];
+            $filter_inst=Institute::find($id);
+        }    
+        $institute=Institute::all(); ?>
+                <label>בחר מוסד</label>
+                <div class="input-line clearfix">
+                        <select id="institue" name="institue" class="pull-right mult">
+                            <?php if (!isset($filter_inst)){?>
+                            <option disabled="disabled" selected="selected" value="">בחר מרשימה</option>
+                            <?php }?>
+                            @foreach ($institute as $inst)
+                                <option  <?php if(isset($filter_inst) && ($filter_inst->id==$inst->id)) {echo 'selected="selected"';}?> value="{{{$inst->id}}}">{{{$inst->name}}}</option>
+                            @endforeach
+                        </select>
+                         <button onclick="calcInsitueFunction(); return false;" clearfix>בחר</button>
+                </div>
                 <div class="input-line clearfix">
                     <label>מספר הילדים בגיל הגן וכיתות א, גילאים 3-6</label>
-                    <input type="number" class= "small" id="ages3to6" size="4" maxlength="4" max="9999" min="1">
+                    <input type="number" <?php if(isset($filter_inst)){ $sum=$filter_inst->number_of_kindergarten_children+$filter_inst->number_of_alef_students; echo "value='$sum'";} ?> class= "small" id="ages3to6" size="4" maxlength="4" max="9999" min="1">
                 </div>
 
                 <div class="input-line clearfix">
                     <label>מספר התלמידים בכיתות ב-י"ב</label>
-                    <input type="number" class= "small" id="agesbetybet" size="4" maxlength="4" max="9999" min="1">
+                    <input type="number" <?php if(isset($filter_inst)){ echo "value='$filter_inst->number_of_non_alef_students'";} ?> class= "small" id="agesbetybet" size="4" maxlength="4" max="9999" min="1">
                 </div>
 
                 <div class="input-line clearfix">
                     <label>מספר התלמידים בחינוך מיוחד</label>
-                    <input type="number"   class= "small" id="agesspecial" size="4" maxlength="4" max="9999" min="1">
+                    <input type="number"  <?php if(isset($filter_inst)){ echo "value='$filter_inst->number_of_special_students'";} ?> class= "small" id="agesspecial" size="4" maxlength="4" max="9999" min="1">
                 </div>
 
 
@@ -66,6 +81,16 @@ function calcFunction() {
 
             function resetFunction() {
     document.getElementById("calcForm").reset();
+    var url= window.location.href.split('?')[0];
+    location.href = url;
+}
+
+function calcInsitueFunction(){
+    var id=document.getElementById('institue').value;
+    var url= window.location.href.split('?')[0];
+    location.href = url+'?inst='+id;
+    //alert(window.location);
+    //alert(id);
 }
             </script>
 @stop
