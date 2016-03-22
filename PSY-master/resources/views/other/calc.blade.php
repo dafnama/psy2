@@ -29,7 +29,7 @@
 
 
                 <div class="input-line clearfix">
-                    <label> (1-100) אחוז כיסוי</label>
+                    <label> (1-100) אחוז כיסוי בפועל</label>
                     <input type="number"   class= "small" id="cover" size="4" maxlength="4" max="100" min="1">
                 </div>
 
