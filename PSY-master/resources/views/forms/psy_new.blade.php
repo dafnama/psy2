@@ -73,10 +73,11 @@
                    id="availability"
                    class="small"
                    name="availability"
-                   size="2"
+                   size="5"
                    maxlength="2"
                    max="50"
                    min="1"
+                   step="0.01"
                    value="{{{$psychologist->availability}}}"
                     >
             <span class="error"></span>
