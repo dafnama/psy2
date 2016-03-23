@@ -10,7 +10,8 @@
 <form class="psy-form"  method="GET">
     <input type="hidden" name="_method" value="post">
     <input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+     <?php if (isset($error)){ echo '<span style="color:red">'.$error."</span><br><br>"; }?>
+    
     <h4>סנן לפי:</h4>
     
      <span>שפ"ח:</span>
