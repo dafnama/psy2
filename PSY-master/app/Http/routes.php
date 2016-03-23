@@ -10,7 +10,7 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-use App\Models\Psychologist;
+
 
 Route::get( '/', function () {
 	return redirect( 'auth/login' );
@@ -21,6 +21,7 @@ Route::group( [ 'middleware' => 'auth', 'permissions' => 'manager' ], function (
 	Route::resource( 'match', 'MatchController', [ 'except' => [ 'show', 'patch' ] ] );
         Route::resource( 'training', 'TrainingController', [ 'except' => [ 'show', 'patch' ]] );
         Route::resource( 'session', 'SessionController', [ 'except' => [ 'show', 'patch' ]] );
+        Route::resource( 'admin', 'AdminController', [ 'except' => [ 'show', 'patch' ]] );
 	Route::resource( 'institute', 'InstituteController', [ 'except' => [ 'patch' ] ] );
     Route::resource( 'psychologist', 'PsychologistController', [ 'except' => [ 'patch' ] ] );
 
@@ -95,6 +96,10 @@ Route::get( 'new_match', function () {
 
 Route::get( 'new_session', function () {
 	return view( 'forms.new_session' );
+} );
+
+Route::get( 'admin', function () {
+	return view( 'forms.admin' );
 } );
 
 Route::get('/session/{filter}', ['as' => 'session', 'uses' => 'sessionController@index']);

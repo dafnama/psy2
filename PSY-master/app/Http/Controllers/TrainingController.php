@@ -10,6 +10,7 @@ use App\Models\Training;
 use App\Models\Shapah;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Session;
+use App\Models\Years;
 use Input;
 
 class TrainingController extends Controller {
@@ -38,7 +39,7 @@ class TrainingController extends Controller {
                 $trainings = $trainings->whereIn('guided_id', $psychologists_array);
             }
             $trainings = $trainings->get();
-		return view( 'indexes.training', compact( 'trainings' ));
+            return view( 'indexes.training', compact( 'trainings' ));
 	}
 
         
@@ -54,7 +55,9 @@ class TrainingController extends Controller {
                  $psychologists= $psychologists->get();
             }
             $form_url     = 'training.store';
-            return view( 'forms.new_training', compact( 'training', 'is_new' ,'psychologists','form_url') );
+            $array_years=new Years;
+            $array_years= $array_years->get();
+            return view( 'forms.new_training', compact( 'training', 'is_new' ,'psychologists','form_url','array_years') );
 	}
         
         public function update( $train ) {
@@ -76,7 +79,9 @@ class TrainingController extends Controller {
 		$is_new = false;
                 $psychologists = $this->getShapahPsychologists( Auth::user() );
                 $form_url    = 'training.update';
-		return view( 'forms.new_training', compact( 'training', 'is_new','psychologists','form_url' ) );
+                $array_years=new Years;
+                $array_years= $array_years->get();
+		return view( 'forms.new_training', compact( 'training', 'is_new','psychologists','form_url' ,'array_years') );
 	}
 
         public function store() {

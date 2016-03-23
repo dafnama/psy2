@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-<?php $array_years=['התשע"ה','התשע"ו','התשע"ז','התשע"ח','התשע"ט','התש"ף','התשפ"א'];?>
+
 <?php $array_kind=['הדרכה בתהליך התמחות','הדרכה בהסמכה להדרכה','הדרכה לפרה מתמחה/סטודנט','הדרכה כללית'];?>
     <form class="psy-form" action="{{{route($form_url,$training->id)}}}" method="post">
         @if(isset($is_new) && !$is_new)
@@ -45,7 +45,7 @@
                         <select name="training_year" class="pull-right mult"  value="{{ $training->training_year }}" required>
                             <option disabled="disabled" selected="selected"  value="">בחר שנה</option>
                             <?php foreach($array_years as $year){?>
-                            <option <?php if($year==$training->training_year){echo 'selected="selected"';}?>><?php echo $year; ?></option>
+                            <option <?php if($year->value==$training->training_year){echo 'selected="selected"';}?>><?php echo $year->value; ?></option>
                             <?php }?>
                         </select>
                     </div>
