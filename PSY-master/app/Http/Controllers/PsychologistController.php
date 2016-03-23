@@ -8,13 +8,32 @@ use App\Models\Visit;
 use App\Models\ProfessionalStatus;
 use App\Models\PsychologistRole;
 use App\User;
-
+use Input;
+use Log;
+use DB;
 class PsychologistController extends Controller {
 
 	public function index() {
-		$all_psychologists = Psychologist::paginate(5);
+            $Psychologists= new Psychologist;
 
-		return view( 'indexes.psy_page', [ 'psychologists' => $all_psychologists ] );
+            if ( Input::has('filter_shaph') && trim(Input::get('filter_shaph')) !== '' ){
+                $list_psy=DB::table('psychologists')->
+                        join('psychologist_shapah', 'psychologists.id', '=', 'psychologist_shapah.psychologist_id')->
+                        where('shapah_id', '=', Input::get('filter_shaph'))->lists('psychologists.id');
+                $psy_array=array();
+                foreach ($list_psy as $psy){
+                    $psy_array[]=$psy;
+                }
+                $Psychologists = $Psychologists->whereIn('id', $psy_array);
+            }
+            if (Input::has('filter_status') && trim(Input::get('filter_status')) !== ''){
+                $Psychologists = $Psychologists->where('professional_status_id', '=', Input::get('filter_status'));
+            }
+            if (Input::has('filter_role') && trim(Input::get('filter_role')) !== ''){
+                $Psychologists = $Psychologists->where('psychologist_role_id',"=",(string)Input::get('filter_role'));
+            }
+            $all_psychologists=$Psychologists->paginate(5);
+            return view( 'indexes.psy_page', [ 'psychologists' => $all_psychologists ] );
 	}
 
 	public function edit( Psychologist $psychologist ) {
