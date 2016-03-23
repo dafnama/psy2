@@ -7,6 +7,7 @@ use App\Models\Shapah;
 use App\Models\Visit;
 use App\Models\ProfessionalStatus;
 use App\Models\PsychologistRole;
+use App\Models\Training;
 use App\User;
 use Input;
 use Log;
@@ -32,7 +33,7 @@ class PsychologistController extends Controller {
             if (Input::has('filter_role') && trim(Input::get('filter_role')) !== ''){
                 $Psychologists = $Psychologists->where('psychologist_role_id',"=",(string)Input::get('filter_role'));
             }
-            $all_psychologists=$Psychologists->paginate(5);
+            $all_psychologists=$Psychologists->paginate(8);
             return view( 'indexes.psy_page', [ 'psychologists' => $all_psychologists ] );
 	}
 
@@ -85,10 +86,20 @@ class PsychologistController extends Controller {
 	}
 
 	public function destroy( Psychologist $psychologist ) {
-		$psychologist->delete();
-		\DB::table( 'psychologist_shapah' )->where( 'psychologist_id', '=', $psychologist->id )->delete();
-
-		return redirect()->route( 'psychologist.index' );
+            $training_num= new Training;
+            $training_num=$training_num->where('guided_id', '=',$psychologist->id)->count();
+            if ($training_num > 0){
+                $error="שגיאה: לפסיכולוג ".$psychologist->last_name." ".$psychologist->first_name." קיימים מפגשי הדרכה";
+                Log::info("Psychologist have training");
+            }
+            else {
+                $psychologist->delete();
+                \DB::table( 'psychologist_shapah' )->where( 'psychologist_id', '=', $psychologist->id )->delete();
+            }
+            $psychologists= new Psychologist;
+            $psychologists= $psychologists->paginate(8);
+            return view( 'indexes.psy_page', compact( 'psychologists' ,'error') );
+            //return redirect()->route( 'psychologist.index' );
 	}
 
 	/**
