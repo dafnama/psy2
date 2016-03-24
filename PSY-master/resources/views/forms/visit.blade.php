@@ -33,7 +33,7 @@
         </div>
 
         <div class="input-line" required>
-            <label>שעות שהיה בבית הספר</label>
+            <label>שעות פעילות בבית הספר</label>
             <input type="number" name="length" size="1" maxlength="1" min="1" max="8" name="date"
                    value="{{{$visit->length}}}">
         </div>
@@ -96,6 +96,7 @@
                         <option>הפניה למכון להתפתחות הילד</option>
                         <option>הפניה למכון להתפתחות הילד</option>
                         <option>הפניה לטיפול פרא רפואי</option>
+                        <option>עבודה משרדית</option>
                         <option>אחר</option>
                     </optgroup>
                 </select>
