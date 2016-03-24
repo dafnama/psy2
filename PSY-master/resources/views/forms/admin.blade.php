@@ -19,6 +19,7 @@
                 <td>
                     <form action="{{route('admin.destroy', $year->id)}}" method="post">
                         <input type="hidden" name="_method" value="DELETE"/>
+                        <input type="hidden" name="type" value="year">
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <button type="submit">
                             <img src="{{{asset('images/icons/delete.png')}}}">
@@ -39,10 +40,11 @@
         @endif
 
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        
 
             <span class="input-line" required>
                 <span>שנה עברית:</span>
-                <input type="text" name="value" size="10" name="date">
+                <input type="text" name="value" size="10">
             </span>
             
             <span class="input-line" required>
@@ -55,4 +57,53 @@
             </span>
 
         </form> <!-- /form -->
+        
+        <br>
+        
+        
+        <h4>סטאטוסים מקצועים:</h4>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>מחק</td>
+                <td>סטאטוס</td>
+            </tr>
+         </thead>
+    @foreach ($ProfessionalStatus as $status)
+            <tr>
+                <td>
+                    <form action="{{route('admin.destroy', $status->id)}}" method="post">
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <input type="hidden" name="type" value="status">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <button type="submit">
+                            <img src="{{{asset('images/icons/delete.png')}}}">
+                        </button>
+                    </form>
+
+                </td>
+                <td>{{$status->professional_status_description }}</td>
+            </tr>
+        @endforeach</table>
+        
+        <h4>הוספת סטאטוס מקצועי לפסיכולוג:</h4>
+        <form class="psy-form" action="{{{route('admin.update',$new_ProfessionalStatus->id)}}}" method="post">
+
+        @if(isset($is_new) && !$is_new)
+            <input type="hidden" name="_method" value="PUT">
+        @endif
+
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+            <span class="input-line" required>
+                <span>סטאטוס:</span>
+                <input type="text" name="professional_status_description" size="10">
+            </span>
+
+            <span class="input-line clearfix">
+                <button type="submit" class="pull-left approve">שלח</button>
+            </span>
+
+        </form> <!-- /form -->
+
 @stop

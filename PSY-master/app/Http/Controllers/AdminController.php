@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use Log;
 use App\Models\Years;
+use App\Models\ProfessionalStatus;
 
 class AdminController extends Controller {
 protected $request;
@@ -11,45 +13,63 @@ protected $request;
    {
        $this->request = $request;
    }
-
-    public function index() {
-        $years  = new Years;
-        $is_new = true;
-        $years= $years->get();
-        return view( 'forms.admin', compact( 'years', 'is_new'));
-    }
-
-        
+       
         public function create() {
             $years  = new Years;
             $is_new = true;
             $years= $years->get();
             $new_year= new Years;
-            return view( 'forms.admin', compact( 'years', 'is_new', 'new_year') );
+            $ProfessionalStatus  = new ProfessionalStatus;
+            $ProfessionalStatus= $ProfessionalStatus->get();
+            $new_ProfessionalStatus  = new ProfessionalStatus;
+            return view( 'forms.admin', compact( 'years', 'is_new', 'new_year','ProfessionalStatus','new_ProfessionalStatus') );
 	}
         
   
         
-        public function store() {
+        public function store( $data=null, $type=null) {
 		$user_data = \Request::all();
-		$years = new Years($user_data);
-                $years->save();
+                if (isset($user_data['value'])){
+                    $years = new Years($user_data);
+                    $years->save();
+                }
+                else {
+                   $ProfessionalStatus  = new ProfessionalStatus($user_data); 
+                   $ProfessionalStatus->save();
+                }
+		
+               
 		$years  = new Years;
                 $is_new = true;
                 $years= $years->get();
                 $new_year= new Years;
-                return view( 'forms.admin', compact( 'years', 'is_new', 'new_year'));
+                $ProfessionalStatus  = new ProfessionalStatus;
+                $ProfessionalStatus= $ProfessionalStatus->get();
+                $new_ProfessionalStatus  = new ProfessionalStatus;
+                return view( 'forms.admin', compact( 'years', 'is_new', 'new_year','ProfessionalStatus','new_ProfessionalStatus') );
 	}
-
-        public function destroy( $Year) {
+        
+    
+        public function destroy( $data, $type=null) {
+            $user_data = \Request::all();
+            if (isset($user_data) && $user_data['type']=='year'){
                 $years= new Years;
-                $years=$years->where('id', '=',$Year)->first();
+                $years=$years->where('id', '=',$data)->first();
                 $years->delete();
+            }
+            else {
+                $ProfessionalStatus= new ProfessionalStatus;
+                $ProfessionalStatus=$ProfessionalStatus->where('id', '=',$data)->first();
+                $ProfessionalStatus->delete();
+            }
 		$years  = new Years;
                 $is_new = true;
                 $years= $years->get();
                 $new_year= new Years;
-        return view( 'forms.admin', compact( 'years', 'is_new', 'new_year'));
+            $ProfessionalStatus  = new ProfessionalStatus;
+            $ProfessionalStatus= $ProfessionalStatus->get();
+            $new_ProfessionalStatus  = new ProfessionalStatus;
+            return view( 'forms.admin', compact( 'years', 'is_new', 'new_year','ProfessionalStatus','new_ProfessionalStatus') );
 	}
         
         
