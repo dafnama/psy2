@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('page-title')
-    <h1>מסך הדרכות</h1>
+    <h1>מסך הגדרות</h1>
 @stop
 
 @section('content')
