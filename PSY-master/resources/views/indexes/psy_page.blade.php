@@ -1,11 +1,16 @@
     @extends('app')
-
+<?php use App\Models\Match;
+use App\Models\Training;
+use App\Models\Years;
+?>
+    
 @section('page-title')
        <h1>הפסיכולוגים במחוז</h1>
 @stop
 
 @section('content')
 
+<?php $array_years=Years::get();?>
 
 <form class="psy-form"  method="GET">
     <input type="hidden" name="_method" value="post">
@@ -13,7 +18,7 @@
      <?php if (isset($error)){ echo '<span style="color:red">'.$error."</span><br><br>"; }?>
     
     <h4>סנן לפי:</h4>
-    
+    <br>
      <span>שפ"ח:</span>
             <span class="input-line ">
                 <select name="filter_shaph" class=" mult">
@@ -31,16 +36,18 @@
                         }?>
                         @endforeach
                     @endforeach
-                    @foreach($shaph_arr as $shap)
-                    <option value="{{{$shap->id}}}">{{{$shap->shapah_name}}}</option>
-                    @endforeach
+                    <?php if (isset($shaph_arr)){?>
+                        @foreach($shaph_arr as $shap)
+                        <option value="{{{$shap->id}}}">{{{$shap->shapah_name}}}</option>
+                        @endforeach
+                    <?php }?>
                 </select>
             </span>
     
     
     <span>סטאטוס מקצועי:</span>
             <span class="input-line ">
-                <select name="filter_status" class=" mult">
+                <select name="filter_status" class=" mult" style="width: 120px">
                     <option disabled="disabled" selected="selected" value="">בחר מרשימה</option>
                     <?php $status_array=array();?>
                     @foreach ($psychologists as $psy)
@@ -57,7 +64,7 @@
     
     <span>תפקיד בשפ"ח:</span>
             <span class="input-line ">
-                <select name="filter_role" class=" mult">
+                <select name="filter_role" class=" mult" style="width: 120px">
                     <option disabled="disabled" selected="selected" value="">בחר מרשימה</option>
                     <?php $status_array=array();?>
                     @foreach ($psychologists as $psy)
@@ -68,6 +75,16 @@
                     @endforeach
                     @foreach ($status_array as $status)
                         <option value="{{{$status['id']}}}">{{{$status['psychologist_roles_description']}}}</option>
+                    @endforeach
+                </select>
+            </span>
+    
+    <span>שנה:</span>
+            <span class="input-line ">
+                <select name="filter_year" class=" mult" style="width: 120px">
+                    <option disabled="disabled" selected="selected" value="">בחר מרשימה</option>
+                    @foreach ($array_years as $year)
+                        <option value="{{{$year->value}}}">{{{$year->value}}}</option>
                     @endforeach
                 </select>
             </span>
@@ -91,7 +108,8 @@
         <td>דואר אלקטרוני</td>
         <td>סטטוס מקצועי</td>
         <td>תפקיד בשפ"ח</td>
-
+        <td>שיבוצים למוסדות</td>
+        <td>שיבוצים להדרכות</td>
 	</tr>
     </thead>
 
@@ -131,13 +149,16 @@
 
         <td>{{$psy->status['professional_status_description']}}</td>
         <td>{{$psy->role['psychologist_roles_description']}}</td>
-
+        <?php  $count_match=Match::where('psychologist_id', '=',$psy->id)->count();?>
+        <td> <?php echo $count_match;?></td>
+        <?php  $count_training=Training::where('guided_id', '=',$psy->id)->count();?>
+        <td> <?php echo $count_training;?></td>
 	</tr>
 	@endforeach
 
 </table>
-{!! $psychologists->render() !!}
 
+<div>סה"כ <?php echo $psychologists->count() ." ";?>רשומות </div>
 
       
 

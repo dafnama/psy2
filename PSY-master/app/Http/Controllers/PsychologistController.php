@@ -32,9 +32,16 @@ class PsychologistController extends Controller {
             }
             if (Input::has('filter_role') && trim(Input::get('filter_role')) !== ''){
                 $Psychologists = $Psychologists->where('psychologist_role_id',"=",(string)Input::get('filter_role'));
+            }$psychologists_array=array();
+            if (Input::has('filter_year') && trim(Input::get('filter_year')) !== ''){
+                $psychologists_array=DB::table('matches')->
+                        join('Trainings', 'Trainings.guided_id ', '=', 'matches.psychologist_id')->
+                        where('match_year','=',Input::get('filter_year'))->
+                        orWhere('training_year','=',Input::get('filter_year'))->lists('psychologist_id');
+                $Psychologists = $Psychologists->whereNotIn('id', $psychologists_array);
             }
-            $all_psychologists=$Psychologists->paginate(8);
-            return view( 'indexes.psy_page', [ 'psychologists' => $all_psychologists ] );
+            $all_psychologists=$Psychologists->get();
+            return view( 'indexes.psy_page', [ 'psychologists' => $all_psychologists] );
 	}
 
 	public function edit( Psychologist $psychologist ) {
@@ -96,8 +103,7 @@ class PsychologistController extends Controller {
                 $psychologist->delete();
                 \DB::table( 'psychologist_shapah' )->where( 'psychologist_id', '=', $psychologist->id )->delete();
             }
-            $psychologists= new Psychologist;
-            $psychologists= $psychologists->paginate(8);
+            $psychologists=Psychologist::get();
             return view( 'indexes.psy_page', compact( 'psychologists' ,'error') );
             //return redirect()->route( 'psychologist.index' );
 	}
