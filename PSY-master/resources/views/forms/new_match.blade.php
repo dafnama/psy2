@@ -1,11 +1,13 @@
 @extends('app')
-
+<?php use App\Models\Years;?>
 @section('page-title')
        <h1>הזנת שיבוץ לשנת עבודה - פסיכולוג במוסד חינוכי</h1>
 @stop
 
 @section('content')
-
+<?php   $array_years=new Years;
+        $array_years= $array_years->get();
+?>
     <form class="psy-form" action="{{{route('match.update',$match->id)}}}" method="post">
 
         @if(isset($is_new) && !$is_new)
@@ -28,13 +30,9 @@
                     <div class="input-line clearfix" >
                         <select name="match_year" class="pull-right mult"  required>
                             <option disabled="disabled" selected="selected"  value="">בחר שנה</option>
-                            <option>התשע"ה</option>
-                            <option>התשע"ו</option>
-                            <option>התשע"ז</option>
-                            <option>התשע"ח</option>
-                            <option>התשע"ט</option>
-                            <option>התש"ף</option>
-                            <option>התשפ"א</option>
+                            <?php foreach($array_years as $year){?>
+                            <option <?php if($year->value==$match->match_year){echo 'selected="selected"';}?>><?php echo $year->value; ?></option>
+                            <?php }?>
                         </select>
                     </div>
 
