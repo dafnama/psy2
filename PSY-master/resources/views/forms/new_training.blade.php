@@ -53,7 +53,7 @@
 
                 <label>מספר שעות שבועיות</label>
                 <div class="input-line">
-                    <input type="number" name="training_hours" value="{{ $training->training_hours}}" size="2" maxlength="3" max="60" min="1" required>
+                    <input type="number" name="training_hours" value="{{ $training->training_hours}}" size="4" maxlength="3" max="60" min="1" step="0.1" required>
                 </div>
                 
                 <label>סוג הדרכה</label>

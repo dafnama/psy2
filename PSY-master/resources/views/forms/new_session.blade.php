@@ -38,7 +38,7 @@ use App\Models\Psychologist;
 
         <div class="input-line" required>
             <label>אורך המפגש בשעות</label>
-            <input type="number" name="training_hours" size="1" maxlength="1" min="1" max="8" name="date" required
+            <input type="number" name="training_hours" size="4" maxlength="1" min="1" max="10" step="0.1" required
                    value="{{{$session->training_hours}}}">
         </div>
 
