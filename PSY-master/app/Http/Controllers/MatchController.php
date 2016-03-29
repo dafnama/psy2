@@ -68,22 +68,32 @@ class MatchController extends Controller {
 
     private function getShapahInstitutes( Psychologist $psychologist ) {
 		$institutes = [];
-		$main_shapah = $this->getMainShapah($psychologist);
-                foreach ($main_shapah->institutes as $shap_ins){
-			         $institutes[] = $shap_ins;
-            }
+                if (Auth::user()->permission == 2){
+                    $main_shapah = $this->getMainShapah($psychologist);
+                    foreach ($main_shapah->institutes as $shap_ins){
+                                     $institutes[] = $shap_ins;
+                    }
+                }
+                else {
+                    $institutes= new Institute;
+                    $institutes= $institutes->get();
+                }
 
 		return $institutes;
 	}
 
     private function getShapahPsychologists( Psychologist $psychologist ) {
 		$psychologists = [];
-		$main_shapah = $this->getMainShapah($psychologist);
-                foreach ($main_shapah->psychologists as $shap_psy){
-			         $psychologists[$shap_psy->id] = $shap_psy;
+		if (Auth::user()->permission == 2){
+                    $main_shapah = $this->getMainShapah($psychologist);
+                    foreach ($main_shapah->psychologists as $shap_psy){
+                                     $psychologists[$shap_psy->id] = $shap_psy;
+                    }
                 }
-
-
+                else {
+                    $psychologists= new Psychologist;
+                    $psychologists= $psychologists->get();
+                }
 		return $psychologists;
 	}
 
