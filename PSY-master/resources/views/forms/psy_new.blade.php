@@ -51,13 +51,13 @@
         </div>
         <div class="input-line" required>
             <label>שם פרטי</label>
-            <input type="text" name="first_name" size="10" maxlength="8" value="{{{$psychologist->first_name}}}"
+            <input type="text" name="first_name" size="15" maxlength="15" value="{{{$psychologist->first_name}}}"
                    required>
             <span class="error"></span>
         </div>
         <div class="input-line" required>
             <label>שם משפחה</label>
-            <input type="text" name="last_name" size="12" maxlength="12" required value="{{{$psychologist->last_name}}}">
+            <input type="text" name="last_name" size="15" maxlength="15" required value="{{{$psychologist->last_name}}}">
             <span class="error"></span>
         </div>
 
@@ -73,8 +73,8 @@
                    id="availability"
                    class="small"
                    name="availability"
-                   size="5"
-                   maxlength="2"
+                   size="8"
+                   maxlength="5"
                    max="50"
                    min="1"
                    step="0.01"
