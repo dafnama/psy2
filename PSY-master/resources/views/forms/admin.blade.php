@@ -31,7 +31,7 @@
                 <td>{{$year->years_key}}</td>
             </tr>
         @endforeach</table>
-
+<br>
 <h4>הוספת שנים:</h4>
         <form class="psy-form" action="{{{route('admin.update',$new_year->id)}}}" method="post">
 
@@ -85,7 +85,7 @@
                 <td>{{$status->professional_status_description }}</td>
             </tr>
         @endforeach</table>
-        
+        <br>
         <h4>הוספת סטאטוס מקצועי לפסיכולוג:</h4>
         <form class="psy-form" action="{{{route('admin.update',$new_ProfessionalStatus->id)}}}" method="post">
 
