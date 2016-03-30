@@ -139,6 +139,10 @@ class PsychologistController extends Controller {
 			//set the record in psychologist_shapah table
 			$is_manager = 1;
 		}
+                else if ($psychologist->psychologist_role_id == 6 ){
+                    $permission = 3;
+                    $is_manager = 1;
+                }
 		// isn't a manager
 		$psychologist->permission = $permission;
 		$psychologist->save();
