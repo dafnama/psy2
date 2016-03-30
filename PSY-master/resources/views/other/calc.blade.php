@@ -54,7 +54,7 @@
         <br>
         <br>
                 <div class="input-line clearfix">
-                    <label>מספר התקנים לפסיכולוג</label>
+                    <label>חלוקת התקן המוקצה</label>
 <input type="number" id="output" readonly class= "medium" size="5" STYLE="background-color: #B8B8B8;"></div>
                     <div class="input-line clearfix">
                      <label>מספר השעות</label>

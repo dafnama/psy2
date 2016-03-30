@@ -42,7 +42,7 @@ use App\Models\Psychologist;
                    value="{{{$session->training_hours}}}">
         </div>
 
-        <div class="dynamic-list" data-label="סוגי פעילויות">
+        <div class="input-line clearfix" required>
             <label>סוג הדרכה</label>
 
             <div class="input-line">
@@ -50,6 +50,20 @@ use App\Models\Psychologist;
                     <option disabled="disabled" selected="selected" value="{{{$session->kind}}}">סוג הדרכה</option>
                         <option>קבוצתי</option>
                         <option>פרטני</option>
+                </select>
+            </div>
+        </div>
+        
+        <div  class="input-line clearfix" required>
+            <label>נושא הדרכה</label>
+
+            <div class="input-line">
+                <select name="subject" class="pull-right mult" title="דווח פעילות" required>
+                    <option disabled="disabled" selected="selected" value="{{{$session->subject}}}">נושא הדרכה</option>
+                        <option>מערכתי</option>
+                        <option>דיאגנוסטיקה</option>
+                        <option>טיפול</option>
+                        <option>אחר</option>
                 </select>
             </div>
         </div>
