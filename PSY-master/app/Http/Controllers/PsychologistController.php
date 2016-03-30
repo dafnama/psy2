@@ -94,7 +94,7 @@ class PsychologistController extends Controller {
 
 	public function destroy( Psychologist $psychologist ) {
             $training_num= new Training;
-            $training_num=$training_num->where('guided_id', '=',$psychologist->id)->count();
+            $training_num=$training_num->where('guided_id', '=',$psychologist->id)->orwhere('guide_id', '=',$psychologist->id)->count();
             if ($training_num > 0){
                 $error="שגיאה: לפסיכולוג ".$psychologist->last_name." ".$psychologist->first_name." קיימים מפגשי הדרכה";
                 Log::info("Psychologist have training");

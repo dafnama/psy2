@@ -45,7 +45,7 @@ use App\Models\Years;
             </span>
     
     
-    <span>סטאטוס מקצועי:</span>
+    <span>סטטוס מקצועי:</span>
             <span class="input-line ">
                 <select name="filter_status" class=" mult" style="width: 120px">
                     <option disabled="disabled" selected="selected" value="">בחר מרשימה</option>
@@ -79,18 +79,19 @@ use App\Models\Years;
                 </select>
             </span>
     
-    <span>שנה:</span>
+    <span>נותרו לשבץ:</span>
             <span class="input-line ">
                 <select name="filter_year" class=" mult" style="width: 120px">
-                    <option disabled="disabled" selected="selected" value="">בחר מרשימה</option>
+                    <option disabled="disabled" selected="selected" value="">בחר שנה</option>
                     @foreach ($array_years as $year)
                         <option value="{{{$year->value}}}">{{{$year->value}}}</option>
                     @endforeach
                 </select>
             </span>
-    
+    <br>
+    <br>
      <span>
-            <button type="submit" class="pull-left approve">שלח</button>
+            <button type="submit" class=" approve">שלח</button>
     </span>
     </form> <!-- /form -->
     <br>
