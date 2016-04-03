@@ -1,12 +1,12 @@
 @extends('app')
-
+<?php use App\Models\Training_kinds; ?>
 @section('page-title')
        <h1>הזנת שיבוץ לשנת עבודה - פסיכולוג בהדרכה</h1>
 @stop
 
 @section('content')
 
-<?php $array_kind=['הדרכה בתהליך התמחות','הדרכה בהסמכה להדרכה','הדרכה לפרה מתמחה/סטודנט','הדרכה כללית'];?>
+<?php $array_kind=Training_kinds::get();?>
     <form class="psy-form" action="{{{route($form_url,$training->id)}}}" method="post">
         @if(isset($is_new) && !$is_new)
             <input type="hidden" name="_method" value="PUT">
@@ -59,7 +59,7 @@
                         <select name="kind" class="pull-right mult"  required>
                             <option disabled="disabled" selected="selected"  value="">בחר סוג</option>
                             <?php foreach($array_kind as $kind){?>
-                            <option <?php if($kind==$training->kind){echo 'selected="selected"';}?>><?php echo $kind; ?></option>
+                            <option <?php if($kind->kind==$training->kind){echo 'selected="selected"';}?>><?php echo $kind->kind; ?></option>
                             <?php }?>
                         </select>
                     </div>

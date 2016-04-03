@@ -106,4 +106,54 @@
 
         </form> <!-- /form -->
 
+        <br>
+        
+        <h4>סוגי הדרכות:</h4>
+    <table border="1">
+        <thead>
+            <tr>
+                <td>מחק</td>
+                <td>סוג הדרכה</td>
+            </tr>
+         </thead>
+    @foreach ($training_kinds as $training_kind)
+            <tr>
+                <td>
+                    <form action="{{route('admin.destroy', $training_kind->id)}}" method="post">
+                        <input type="hidden" name="_method" value="DELETE"/>
+                        <input type="hidden" name="type" value="training_kind">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <button type="submit">
+                            <img src="{{{asset('images/icons/delete.png')}}}">
+                        </button>
+                    </form>
+
+                </td>
+                <td>{{$training_kind->kind }}</td>
+            </tr>
+        @endforeach</table>
+<br>
+<h4>הוספת סוג:</h4>
+        <form class="psy-form" action="{{{route('admin.update',$new_training_kind->id)}}}" method="post">
+
+        @if(isset($is_new) && !$is_new)
+            <input type="hidden" name="_method" value="PUT">
+        @endif
+
+        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+        
+
+            <span class="input-line" required>
+                <span>סוג:</span>
+                <input type="text" name="kind" size="10">
+            </span>
+
+            <span class="input-line clearfix">
+                <button type="submit" class="pull-left approve">שלח</button>
+            </span>
+
+        </form> <!-- /form -->
+        
+        <br>
+
 @stop
