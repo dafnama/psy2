@@ -43,7 +43,7 @@ class TrainingController extends Controller {
 	}
 
         
-        public function create() {
+        public function create($error=null) {
             $training  = new Training();
             $is_new = true;
             $user=Auth::user();
@@ -57,7 +57,7 @@ class TrainingController extends Controller {
             $form_url     = 'training.store';
             $array_years=new Years;
             $array_years= $array_years->get();
-            return view( 'forms.new_training', compact( 'training', 'is_new' ,'psychologists','form_url','array_years') );
+            return view( 'forms.new_training', compact( 'training', 'is_new' ,'psychologists','form_url','array_years', 'error') );
 	}
         
         public function update( $train ) {
@@ -87,8 +87,15 @@ class TrainingController extends Controller {
         public function store() {
 		$user_data = \Request::all();
 		$training = new Training($user_data);
+                $error=null;
+                if($user_data['guide_id'] == $user_data['guided_id'] ){
+                    $error='לא ניתן לשבץ מדריך ומודרך זהים';
+                    return redirect()->route( 'training.create', compact( 'error') );
+                }
+                else {
                 $training->save();
-		return redirect()->route( 'training.index' );
+                }
+		return redirect()->route( 'training.index', compact( 'error') );
 	}
         
         
