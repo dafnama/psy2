@@ -48,7 +48,7 @@ class TrainingController extends Controller {
             $is_new = true;
             $user=Auth::user();
             if ($user->permission!=3){
-            $psychologists = $this->getShapahPsychologists( $user);
+                $psychologists = $this->getShapahPsychologists( $user);
             }
             else {
                  $psychologists= new Psychologist;
