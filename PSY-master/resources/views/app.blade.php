@@ -85,9 +85,9 @@
                         <li><a href="/calc">מחשבון לתקן שיבוץ</a></li>
                         <li><a href="{{route('match.index')}}">רשימת שיבוצים</a></li>
                         <li><a href="{{route('match.create')}}">שיבוץ פסיכולוג למוסד בשנת עבודה</a></li>
-                        @if(!Auth::user()->isAdmin())
+                        <?php if(Auth::user()->permission==3){?>
                         <li><a href="{{route('admin.create')}}">מסך הגדרות</a></li>
-                        @endif
+                        <?php }?>
                     </ul>
                 </li>
                 @endif
