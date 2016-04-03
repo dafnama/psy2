@@ -140,8 +140,14 @@ class PsychologistController extends Controller {
 			$is_manager = 1;
 		}
                 else if ($psychologist->psychologist_role_id == 6 ){
-                    $permission = 3;
-                    $is_manager = 1;
+                    if ( \Auth::user()->permission==3 ){
+                        $permission = 3;
+                        $is_manager = 1;
+                    }
+                    else {
+                        $psychologist->psychologist_role_id=2;
+                    }
+                    
                 }
 		// isn't a manager
 		$psychologist->permission = $permission;
