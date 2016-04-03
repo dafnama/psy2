@@ -16,11 +16,11 @@
                     <label>בחר פסיכולוג</label>
                     <div class="input-line clearfix">
                         <select name="guided_id" class="pull-right mult" required>
-                            <?php if(!isset($training->guide_id)){?>
+                            <?php if(!isset($training->guided_id)){?>
                             <option disabled="disabled" selected="selected" value="">בחר מרשימה</option>
                             <?php } ?>
                             @foreach ($psychologists as $psychologist)
-                                <option <?php if ($training->guide_id==$psychologist->id){echo 'selected="selected"';}?> value="{{{$psychologist->id}}}">{{{$psychologist->first_name.(' ').$psychologist->last_name}}}</option>
+                                <option <?php if ($training->guided_id==$psychologist->id){echo 'selected="selected"';}?> value="{{{$psychologist->id}}}">{{{$psychologist->first_name.(' ').$psychologist->last_name}}}</option>
                             @endforeach
                         </select>
                          <span class="error"></span>
@@ -30,11 +30,9 @@
                     <label>בחר מדריך</label>
                     <div class="input-line clearfix">
                         <select name="guide_id" class="pull-right mult" required>
-                            <?php if(!isset($training->guide_id)){?>
                             <option disabled="disabled" selected="selected" value="">בחר מרשימה</option>
-                            <?php } ?>
                             @foreach ($psychologists as $psychologist)
-                                <option <?php if ($training->guided_id==$psychologist->id){echo 'selected="selected"';}?> value="{{{$psychologist->id}}}">{{{$psychologist->first_name.(' ').$psychologist->last_name}}}</option>
+                                <option <?php if ($training->guide_id==$psychologist->id){echo 'selected="selected"';}?> value="{{{$psychologist->id}}}">{{{$psychologist->first_name.(' ').$psychologist->last_name}}}</option>
                             @endforeach
                         </select>
                          <span class="error"></span>

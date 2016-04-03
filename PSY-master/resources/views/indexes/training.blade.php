@@ -116,7 +116,7 @@ use App\Models\Psychologist;
                 </td>
                 <td>
                 <a href="{{route('training.edit', $train->id)}}">
-                <img src="{{{asset('images/icons/view.png')}}}" height="20" width="20">
+                <img src="{{{asset('images/icons/edit.png')}}}" height="20" width="20">
             </a>
         </td>
                 <?php $guid=Psychologist::find($train->guide_id)?>
