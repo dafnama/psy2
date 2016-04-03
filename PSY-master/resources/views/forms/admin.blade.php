@@ -62,6 +62,7 @@
         
         
         <h4>סטאטוסים מקצועים:</h4>
+         <?php if (isset($error)){ echo '<span style="color:red">'.$error."</span><br>"; }?>
     <table border="1">
         <thead>
             <tr>
