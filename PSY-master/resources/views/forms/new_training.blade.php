@@ -7,7 +7,6 @@
 @section('content')
 
 <?php $array_kind=Training_kinds::get();?>
-<?php if (isset($error)){ echo '<span style="color:red">'.$error."</span><br>"; }?>
     <form class="psy-form" action="{{{route($form_url,$training->id)}}}" method="post">
         @if(isset($is_new) && !$is_new)
             <input type="hidden" name="_method" value="PUT">
