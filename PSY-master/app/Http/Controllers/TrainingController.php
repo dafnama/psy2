@@ -39,7 +39,7 @@ class TrainingController extends Controller {
                 $trainings = $trainings->whereIn('guided_id', $psychologists_array);
             }
             $trainings = $trainings->get();
-            return view( 'indexes.training', compact( 'trainings' ));
+            return view( 'indexes.training', compact( 'trainings', 'error' ));
 	}
 
         
@@ -90,10 +90,29 @@ class TrainingController extends Controller {
                 $error=null;
                 if($user_data['guide_id'] == $user_data['guided_id'] ){
                     $error='לא ניתן לשבץ מדריך ומודרך זהים';
-                    return redirect()->route( 'training.create', compact( 'error') );
+                    $trainings= new Training;
+                    $trainings= $trainings->get();
+                    return view( 'indexes.training', compact( 'trainings' ,'error') );
                 }
                 else {
-                $training->save();
+                    $trainings = new Training();
+                    $trainings=$trainings->where('guided_id','=',$user_data['guided_id']  )->get();
+                    foreach($trainings as $train){
+                        if(($train->guide_id== $user_data['guide_id'])&&
+                                ($train->training_year== $user_data['training_year']) &&
+                                ($train->kind== $user_data['kind'])){
+                                    $flag=1;
+                        }
+                    }
+                    if(isset($flag)){
+                        $error='למודרך קיימת הדרכה זהה בשנה זאת';
+                        $trainings= new Training;
+                        $trainings= $trainings->get();
+                        return view( 'indexes.training', compact( 'trainings' ,'error') );
+                    }
+                    else {
+                        $training->save();
+                    }
                 }
 		return redirect()->route( 'training.index', compact( 'error') );
 	}

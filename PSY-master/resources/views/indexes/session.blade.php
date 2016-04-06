@@ -127,6 +127,9 @@ use App\Models\Psychologist;?>
       echo "<br>";?>
     <h4>אחוזי השלמה: </h4>
     <?php $count_psy=( count($guided_array));
+            if($count_psy==0){
+                $count_psy=1;
+            }
       ?></div>
 
 
