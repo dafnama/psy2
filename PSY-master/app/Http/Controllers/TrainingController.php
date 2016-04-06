@@ -122,7 +122,7 @@ class TrainingController extends Controller {
                 $session_num= new Session;
                 $session_num=$session_num->where('trining_id', '=',$training)->count();
                 if ($session_num > 0){
-                    $error="שגיאה: להדרכה זאת קיים דיווח מפגש הדרכה";
+                    $error="שגיאה: להדרכה זו קיים דיווח מפגש הדרכה";
                     Log::info("Training have sessions");
                 }
                 else {
