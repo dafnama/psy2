@@ -49,29 +49,36 @@ protected $request;
                 $sessions = $sessions->where('kind',"=",(string)Input::get('filter_kind'));
             }
             $user= Auth::user();
+            //psycologist or manager
             if ($user->permission!=3){
                 $trains_array=array();
                 $trains= new Training;
+                // manager
                 if ($user->permission==2){
-                    $psychologists=$this->getShapahPsychologists($user);
+                    $psychologists=$this->getShapahPsychologists($user); 
+                    $psy_array=array();
                     foreach ($psychologists as $psy){
-                        $trains=$trains->where('guided_id', '=',(int)$psy->id)->orWhere('guide_id', '=',(int)$psy->id)->get();
-                        foreach ($trains as $train){
-                            $trains_array[]=$train->id;
+                        if (!in_array($psy->id, $psy_array)){
+                            $psy_array[]=$psy->id;
                         }
                     }
+                    $trains=$trains->whereIn('guided_id', $psy_array)->get();
+                    foreach ($trains as $train){
+                        $trains_array[]=$train->id;
+                    }  
                     $sessions = $sessions->whereIn('trining_id', $trains_array);
                 }
+                //psycologist
                 else {
                     $trains=$trains->where('guided_id', '=',$user->id)->orWhere('guide_id', '=',$user->id)->get();
-                        foreach ($trains as $train){
-                            $trains_array[]=$train->id;
-                        }
+                    foreach ($trains as $train){
+                        $trains_array[]=$train->id;
+                    }
                     $sessions = $sessions->whereIn('trining_id', $trains_array);
                 }
             }
             $sessions = $sessions->get();
-		return view( 'indexes.session', compact( 'sessions'));
+            return view( 'indexes.session', compact( 'sessions'));
 	}
 
         
