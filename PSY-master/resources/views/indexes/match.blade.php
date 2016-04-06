@@ -157,15 +157,10 @@ use App\Models\Institute;
         @endforeach
     </table>
 
-    <script>
-        function updateFunction() {
-       document.getElementById('output2').value = ((document.getElementById('output').value)*             (document.getElementById('percent').value)/100).toFixed(2);
-        document.getElementById('output3').value = ((document.getElementById('output2').value)-{{{$used_hours}}}).toFixed(2);
-    }
-    </script>
+
 <br>
 <div><?php if(isset($matches) && $matches){
-                echo $matches->count() ." ";
+                echo count($matches) ." ";
             }
             else {
                 echo "0 ";
@@ -175,5 +170,10 @@ use App\Models\Institute;
 סה"כ שעות: 
 <?php echo $sum_hour?></div>
 
-
+    <script>
+        function updateFunction() {
+       document.getElementById('output2').value = ((document.getElementById('output').value)*             (document.getElementById('percent').value)/100).toFixed(2);
+        document.getElementById('output3').value = ((document.getElementById('output2').value)-{{{$used_hours}}}).toFixed(2);
+    }
+    </script>
 @stop
