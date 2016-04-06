@@ -10,7 +10,19 @@ use Illuminate\Support\Facades\Auth;
 
 class VisitController extends Controller {
 	public function index() {
-        $visits = $this->getUserVisits( Auth::user() );
+            $user= Auth::user();
+            if ($user->permission!=3){
+                if ($user->permission==2){
+                $visits = $this->getUserVisits( $user );
+                }
+                else {
+                    $visits = $this->getUserVisits( $user );
+                }
+            }
+            else {
+                $visits= new Visit();
+                $visits= $visits->get();
+            }
 		return view( 'indexes.visit', compact( 'visits' ) );
 	}
 
