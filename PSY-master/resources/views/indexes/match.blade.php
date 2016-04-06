@@ -164,7 +164,13 @@ use App\Models\Institute;
     }
     </script>
 <br>
-<div><?php if (isset($matches)){echo $matches->count() ." ";}?>רשומות
+<div><?php if(isset($matches) && $matches){
+                echo $matches->count() ." ";
+            }
+            else {
+                echo "0 ";
+            }
+    ?>רשומות
     ,
 סה"כ שעות: 
 <?php echo $sum_hour?></div>

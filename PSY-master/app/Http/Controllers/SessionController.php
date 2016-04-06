@@ -62,7 +62,7 @@ protected $request;
                             $psy_array[]=$psy->id;
                         }
                     }
-                    $trains=$trains->whereIn('guided_id', $psy_array)->get();
+                    $trains=$trains->whereIn('guided_id', $psy_array)->orwhereIn('guide_id', $psy_array)->get();
                     foreach ($trains as $train){
                         $trains_array[]=$train->id;
                     }  
