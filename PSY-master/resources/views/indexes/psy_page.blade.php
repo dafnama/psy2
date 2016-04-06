@@ -24,21 +24,25 @@ use App\Models\Years;
                 <select name="filter_shaph" class=" mult">
                     <option disabled="disabled" selected="selected" value="">בחר מרשימה</option>
                     <option value="">הכל</option>
-                    <?php $shaphs_psy_array=array();?>
+                    <?php $shaphs_psy_array=array();$shaph_arr=array(); $shaph_view_arr=array();?>
                     @foreach ($psychologists as $psy)
-                        <?php $shaphs_psy_array[]=$psy->shapahs;
-                        $shaph_arr=array();?>
+                        <?php $shaphs_psy_array[]=$psy->shapahs;?>
                     @endforeach
                     @foreach ($shaphs_psy_array as $shaph_psy)
                         @foreach ($shaph_psy as $shaph)
-                        <?php if (!in_array($shaph, $shaph_arr)){
-                            $shaph_arr[]=$shaph;
-                        }?>
+                            <?php if (!in_array($shaph, $shaph_arr)){
+                                $shaph_arr[]=$shaph;
+                            }?>
                         @endforeach
                     @endforeach
                     <?php if (isset($shaph_arr)){?>
                         @foreach($shaph_arr as $shap)
-                        <option value="{{{$shap->id}}}">{{{$shap->shapah_name}}}</option>
+                            <?php if(!in_array($shap->id,$shaph_view_arr)){
+                                $shaph_view_arr[$shap->id]=$shap->shapah_name;
+                            }?>
+                        @endforeach
+                        @foreach($shaph_view_arr as $key=>$val)
+                            <option value="{{{$key}}}">{{{$val}}}</option>
                         @endforeach
                     <?php }?>
                 </select>
