@@ -131,7 +131,7 @@ use App\Models\Psychologist;
             <?php $sum_hour=$sum_hour+$train->training_hours ;?>
         @endforeach</table>
 <br>
-<div><?php echo $trainings->count() ." ";?>רשומות
+<div><?php if(isset($trainings) && $trainings){echo $trainings->count() ." ";}?>רשומות
     ,
 סה"כ שעות: 
 <?php echo $sum_hour?></div>

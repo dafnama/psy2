@@ -159,7 +159,8 @@ use App\Models\Years;
 
 </table>
 
-<div>סה"כ <?php echo $psychologists->count() ." ";?>רשומות </div>
+<div>סה"כ <?php if(isset($psychologists) && $psychologists){
+                    echo $psychologists->count() ." ";}?>רשומות </div>
 
       
 
