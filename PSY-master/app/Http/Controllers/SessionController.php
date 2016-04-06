@@ -42,6 +42,9 @@ protected $request;
             if (Input::has('filter_date') && trim(Input::get('filter_date')) !== ''){
                 $sessions = $sessions->where('training_date', '>=', Input::get('filter_date'));
             }
+            if (Input::has('filter_to_date') && trim(Input::get('filter_to_date')) !== ''){
+                $sessions = $sessions->where('training_date', '<=', Input::get('filter_to_date'));
+            }
             if (Input::has('filter_kind') && trim(Input::get('filter_kind')) !== ''){
                 $sessions = $sessions->where('kind',"=",(string)Input::get('filter_kind'));
             }
