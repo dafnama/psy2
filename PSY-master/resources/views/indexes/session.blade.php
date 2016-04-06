@@ -74,6 +74,7 @@ use App\Models\Psychologist;?>
         <tr>
             <td>מחק</td>
             <td>מזהה</td>
+            <td>מודרך</td>
             <td>מדריך</td>
             <td>תאריך</td>
             <td>שעות</td>
@@ -98,6 +99,7 @@ use App\Models\Psychologist;?>
                 <td>{{$ses->id}}</td>
                 <?php $guid=Psychologist::find(Training::find($ses->trining_id)->guide_id)?>
                 <?php $guided=Psychologist::find(Training::find($ses->trining_id)->guided_id)?>
+                <td>{{$guided->first_name.' ' .$guided->last_name  }}</td>
                 <td>{{$guid->first_name.' ' .$guid->last_name  }}</td>
                 <td>{{$ses->training_date }}</td>
                 <td>{{$ses->training_hours }}</td>

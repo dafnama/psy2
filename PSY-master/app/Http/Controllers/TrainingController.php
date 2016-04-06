@@ -36,7 +36,7 @@ class TrainingController extends Controller {
                 foreach ($psychologists as $psy){
                     $psychologists_array[]=(int)$psy->id;
                 }
-                $trainings = $trainings->whereIn('guided_id', $psychologists_array);
+                $trainings = $trainings->whereIn('guided_id', $psychologists_array)->orwhereIn('guide_id', $psychologists_array);
             }
             $trainings = $trainings->get();
             return view( 'indexes.training', compact( 'trainings', 'error' ));
