@@ -35,10 +35,6 @@ use App\Models\Psychologist;?>
                 </select>
             </span>
     
-    <span>מתאריך:</span>
-            <span class="input-line">
-                 <input type="text" id="datepicker" class="datepicker" size="10" name="filter_date" data-format="YYYY-MM-DD" value="<?php echo date("d M Y", strtotime("-1 year"));?>">
-            </span>
     &nbsp
      <span>סוג:</span>
             <span class="input-line ">
@@ -56,7 +52,16 @@ use App\Models\Psychologist;?>
                     @endforeach
                 </select>
             </span>
-
+     
+    <span>מתאריך:</span>
+            <span class="input-line">
+                 <input type="date" id="datepicker" class="datepicker" size="10" name="filter_date" >
+            </span>
+    
+    <span>עד תאריך:</span>
+            <span class="input-line">
+                 <input type="date" id="datepicker" class="datepicker" size="10" name="filter_to_date" >
+            </span>
 
     <span>
             <button type="submit" class="pull-left approve">שלח</button>
