@@ -60,9 +60,9 @@ use App\Models\Psychologist;
             <div class="input-line">
                 <select name="subject" class="pull-right mult" title="דווח פעילות" required>
                     <option disabled="disabled" selected="selected" value="{{{$session->subject}}}">נושא הדרכה</option>
-                        <option>מערכתי</option>
-                        <option>דיאגנוסטיקה</option>
-                        <option>טיפול</option>
+                        <option>אבחון והערכה פרטניים</option>
+                        <option>טיפול בילדים ובני משפחתם</option>
+                        <option>אבחון, הערכה והתערבות במערכת החינוך</option>
                         <option>אחר</option>
                 </select>
             </div>

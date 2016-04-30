@@ -8,9 +8,9 @@ use App\Models\Psychologist;?>
 
 @section('content')
 <?php $sum_hour=0;
-      $sum_system=0;
-      $sum_diagnustika=0;
-      $sum_treatment=0;
+      $sum_private=0;
+      $sum_treatment_and_family=0;
+      $sum_education_system=0;
       $sum_other=0;
       $guided_array=array();?>
 <form class="psy-form"  method="GET">
@@ -55,12 +55,12 @@ use App\Models\Psychologist;?>
      
     <span>מתאריך:</span>
             <span class="input-line">
-                 <input type="date" id="datepicker" class="datepicker" size="10" name="filter_date" >
+                 <input type="date" id="datepicker" class="datepicker" size="10" name="filter_date"  style="width: 117px;">
             </span>
     
     <span>עד תאריך:</span>
             <span class="input-line">
-                 <input type="date" id="datepicker" class="datepicker" size="10" name="filter_to_date" >
+                 <input type="date" id="datepicker" class="datepicker" size="10" name="filter_to_date"  style="width: 117px; " >
             </span>
 
     <span>
@@ -112,14 +112,14 @@ use App\Models\Psychologist;?>
                 $guided_array[]=$guided;
             }
             $sum_hour=$sum_hour+$ses->training_hours;
-            if ($ses->subject=="מערכתי"){
-                $sum_system=$sum_system=+$ses->training_hours;
+            if ($ses->subject=="אבחון והערכה פרטניים"){
+                $sum_private=$sum_private=+$ses->training_hours;
             }
-            else if($ses->subject=="דיאגנוסטיקה"){
-                $sum_diagnustika=$sum_diagnustika=+$ses->training_hours;
+            else if($ses->subject=="טיפול בילדים ובני משפחתם"){
+                $sum_treatment_and_family=$sum_treatment_and_family=+$ses->training_hours;
             }
-            else if($ses->subject=="טיפול"){
-                $sum_treatment=$sum_treatment=+$ses->training_hours;
+            else if($ses->subject=="אבחון, הערכה והתערבות במערכת החינוך"){
+                $sum_education_system=$sum_education_system=+$ses->training_hours;
             }
             else {
                 $sum_other=$sum_other=+$ses->training_hours;
@@ -151,10 +151,10 @@ use App\Models\Psychologist;?>
 Morris.Bar({
   element: 'chart',
   data: [
-    { subject: 'מערכתי', value: <?php echo 100*$sum_system/($count_psy*100);?> },
-    { subject: 'דיאגנוסטיקה', value: <?php echo 100*$sum_diagnustika/($count_psy*60);?> },
-    { subject: 'טיפול', value: <?php echo 100*$sum_treatment/($count_psy*100);?> },
-    { subject: 'אחר', value: <?php echo 100*$sum_other/($count_psy*40);?> }
+    { subject: 'אבחון והערכה פרטניים', value: <?php echo 100*$sum_private/($count_psy*60);?> },
+    { subject: 'טיפול בילדים ובני משפחתם', value: <?php echo 100*$sum_treatment_and_family/($count_psy*100);?> },
+    { subject: 'אבחון, הערכה והתערבות במערכת החינוך', value: <?php echo 100*$sum_education_system/($count_psy*100);?> },
+    { subject: 'אחר', value: <?php echo 100*$sum_other/($count_psy*100);?> }
   ],
   xkey: 'subject',
   ykeys: ['value'],
