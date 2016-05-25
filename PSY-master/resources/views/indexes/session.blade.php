@@ -113,16 +113,16 @@ use App\Models\Psychologist;?>
             }
             $sum_hour=$sum_hour+$ses->training_hours;
             if ($ses->subject=="אבחון והערכה פרטניים"){
-                $sum_private=$sum_private=+$ses->training_hours;
+                $sum_private=$sum_private+$ses->training_hours;
             }
             else if($ses->subject=="טיפול בילדים ובני משפחתם"){
-                $sum_treatment_and_family=$sum_treatment_and_family=+$ses->training_hours;
+                $sum_treatment_and_family=$sum_treatment_and_family+$ses->training_hours;
             }
             else if($ses->subject=="אבחון, הערכה והתערבות במערכת החינוך"){
-                $sum_education_system=$sum_education_system=+$ses->training_hours;
+                $sum_education_system=$sum_education_system+$ses->training_hours;
             }
             else {
-                $sum_other=$sum_other=+$ses->training_hours;
+                $sum_other=$sum_other+$ses->training_hours;
             }
             ?>
         @endforeach</table>
@@ -138,7 +138,6 @@ use App\Models\Psychologist;?>
                 $count_psy=1;
             }
       ?></div>
-
 
 <link rel="stylesheet" href="http://cdn.oesmith.co.uk/morris-0.4.3.min.css">
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
