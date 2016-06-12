@@ -77,10 +77,10 @@ return [
 
 		'sqlsrv' => [
 			'driver'   => 'sqlsrv',
-			'host'     => env('DB_HOST', 'DAFNA\SQL'),
-			'database' => env('DB_DATABASE', 'PSY_TMP'),
+			'host'     => env('DB_HOST', '127.0.0.1'),
+			'database' => env('DB_DATABASE', 'psy'),
 			'username' => env('DB_USERNAME', 'psy'),
-			'password' => env('DB_PASSWORD', 'psy1'),
+			'password' => env('DB_PASSWORD', 'psy'),
 			'prefix'   => '',
 		],
 
