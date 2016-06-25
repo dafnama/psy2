@@ -7,6 +7,7 @@ use App\Models\Visit;
 use App\Models\ProfessionalStatus;
 use App\Models\PsychologistRole;
 use App\Models\Training;
+use Illuminate\Support\Facades\Auth;
 use App\User;
 use Input;
 use Log;
@@ -15,6 +16,7 @@ use DB;
 class PsychologistController extends Controller {
 
     public function index() {
+        $user=Auth::user();
         $Psychologists= new Psychologist;
         //filters
         if ( Input::has('filter_shaph') && trim(Input::get('filter_shaph')) !== '' ){
@@ -39,6 +41,15 @@ class PsychologistController extends Controller {
                     where('match_year','=',Input::get('filter_year'))->
                     orWhere('training_year','=',Input::get('filter_year'))->lists('psychologist_id');
             $Psychologists = $Psychologists->whereNotIn('id', $psychologists_array);
+        }
+        //permission
+        if ($user->permission!=3){
+            $psychologists=$this->getShapahPsychologists($user);
+            $psychologists_array=array();
+            foreach ($psychologists as $psy){
+                $psychologists_array[]=(int)$psy->id;
+            }
+            $Psychologists = $Psychologists->whereIn('id', $psychologists_array);
         }
         $all_psychologists=$Psychologists->get();
         return view( 'indexes.psy_page', [ 'psychologists' => $all_psychologists] );
@@ -149,4 +160,23 @@ class PsychologistController extends Controller {
             }
 
     }
+    
+        private function getShapahPsychologists( Psychologist $psychologist ) {
+           $psychologists = [];
+           $main_shapah = $this->getMainShapah($psychologist);
+           foreach ($main_shapah->psychologists as $shap_psy){
+           $psychologists[$shap_psy->id] = $shap_psy;
+           }
+           return $psychologists;
+   }
+        
+    public function getMainShapah(Psychologist $manager){
+        $main_shapah = new Shapah();
+        foreach ($manager->shapahs as $shapah){
+            if ($manager->shapahs()->where('shapah_id',$shapah->id)->first()){
+                $main_shapah = $shapah;
+            }
+        }
+    return $main_shapah;
+}
 }

@@ -92,7 +92,7 @@
 
         <div class="input-line" required>
             <label>דוא"ל</label>
-            <input type="email" name="email" size="22" maxlength="22" required
+            <input type="email" name="email" size="28" maxlength="40" required
                    value="{{{$psychologist->email}}}">
             <span class="error"></span>
         </div>
