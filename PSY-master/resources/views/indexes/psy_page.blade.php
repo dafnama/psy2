@@ -106,7 +106,6 @@ use App\Models\Years;
 		<td>מחק</td>
 		<td>צפיה</td>
         <td>שפ"ח</td>
-		<td>מספר רישיון</td>
 		<td>שם פרטי</td>
 		<td>שם משפחה</td>
 		<td>טלפון</td>
@@ -145,7 +144,6 @@ use App\Models\Years;
                 {{$shapah->shapah_name}}<br/>
             @endforeach
         </td>
-        <td>{{{$psy->license_number}}}</td>
 		<td>{{{$psy->first_name}}}</td>
 		<td>{{{$psy->last_name}}}</td>
 

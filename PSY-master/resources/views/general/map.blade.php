@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('page-title')
-       <h1>מפת מוסדות המחוז</h1>
+       <h1>מפת השפ"חים  במחוז</h1>
 @stop
 
 @section('content')
