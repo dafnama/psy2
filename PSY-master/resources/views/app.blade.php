@@ -59,7 +59,7 @@
                     </ul>
                 </li>
 
-                <?php if(!(Auth::user()->permission==3 && Auth::user()->first_name=="אילן" )){?>
+                
                 <li>
                     <a href="#">מפגשים ודיווח</a>
                     <ul>
@@ -69,7 +69,7 @@
                         <li><a href="{{route('session.create')}}">דיווח מפגשי הדרכה</a></li>
                     </ul>
                 </li>
-                <?php }?>
+      
                 @if(!Auth::user()->isUser())
                 <li>
                     <a href="#">הדרכות</a>
